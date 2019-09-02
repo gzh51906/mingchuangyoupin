@@ -29,7 +29,7 @@
 <script>
 import Vue from "vue";
 import { Search, Row, Col, Tab, Tabs } from "vant";
-import Classifys from "./Classifys.vue";
+import Classifys from "../childcomponents/home/Classifys.vue";
 
 Vue.use(Search)
   .use(Row)
