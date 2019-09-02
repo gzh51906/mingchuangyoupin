@@ -1,0 +1,162 @@
+<template>
+  <div class="detailsbox">
+    <header>
+      <el-row>
+        <el-col :span="6">
+          <i class="icon1 el-icon-house" @click="gohome"></i>
+        </el-col>
+        <el-col :span="12">
+          <h3>{{this.name}}</h3>
+        </el-col>
+        <el-col :span="6">
+          <i class="icon2 el-icon-shopping-cart-1"></i>
+          <i class="icon2 el-icon-search"></i>
+        </el-col>
+      </el-row>
+    </header>
+    <nav>
+      <ul>
+        <!-- <li v-for="item in "></li> -->
+      </ul>
+    </nav>
+    <main>
+      <el-row class="list" :gutter="20">
+        <el-col :span="12" v-for="(item,idx) in tab.listbot" :key="idx">
+          <div class="grid-content bg-purple">
+            <img :src="item.imgsrc" alt />
+            <h4>{{item.title}}</h4>
+            <p>￥{{item.price}}</p>
+          </div>
+        </el-col>
+      </el-row>
+    </main>
+  </div>
+</template>
+
+<script>
+import Vue from "vue";
+// import Bus from "../../busforjw.js";
+import { Swipe, SwipeItem, Stepper, Grid, GridItem } from "vant";
+import { Script } from "vm";
+
+Vue.use(Swipe)
+  .use(SwipeItem)
+  .use(Stepper)
+  .use(Grid)
+  .use(GridItem);
+export default {
+  data() {
+    return {
+      type: "",
+      name: "",
+      tab: {}
+    };
+  },
+  created() {
+    this.type = this.$route.query.a;
+    this.name = this.$route.query.b;
+    // this.getRouterData();
+    this.getlistdata();
+  },
+  methods: {
+    getRouterData() {},
+    gohome() {
+      this.$router.push({ name: "home" });
+    },
+    async getlistdata() {
+      let { data } = await this.$axios.get("http://localhost:5786/classify/", {
+        params: {
+          type: this.type,
+          charset: "utf8"
+        }
+      });
+      this.tab.listtop = data.data.fenlei;
+      this.tab.listbot = data.data.tuijian;
+      this.$forceUpdate();
+    }
+  }
+};
+</script>
+<style lang="scss" scoped>
+.detailsbox {
+  height: 100%;
+  width: 100%;
+  margin: auto;
+}
+header {
+  width: 100%;
+  position: absolute;
+  top: 0px;
+  height: 1.146667rem;
+  background: #fff;
+  border-bottom: 1px solid #dcdfe6;
+
+  .el-row {
+    height: 100%;
+    h3 {
+      height: 100%;
+      line-height: 1.146667rem;
+      text-align: center;
+      margin: 0;
+      color: #303133;
+      font-size: 0.4rem;
+      font-family: "Helvetica Neue", Helvetica, "PingFang SC",
+        "Hiragino Sans GB", "Microsoft YaHei", "微软雅黑", Arial, sans-serif;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+    i {
+      cursor: pointer;
+      height: 100%;
+      line-height: 43px;
+      text-align: center;
+      margin: 0;
+      color: #303133;
+      font-size: 20px;
+    }
+    .icon1 {
+      float: left;
+      margin-left: 10px;
+    }
+    .icon2 {
+      float: right;
+      margin-right: 10px;
+    }
+  }
+}
+main {
+  background: #effeee;
+  margin: auto;
+  width: 10rem;
+  position: absolute;
+  top: 1.173333rem;
+  bottom: 1.466667rem;
+  overflow: auto;
+  .list {
+    background: #fff;
+    .grid-content {
+      padding: 0.133333rem;
+      box-sizing: border-box;
+      img {
+        width: 100%;
+        background: #eee;
+      }
+      h4 {
+        color: #000;
+        font-size: 0.36rem;
+        text-align: left;
+        width: 100%;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+      }
+      p {
+        color: #f00;
+        text-align: left;
+        margin-bottom: 0.133333rem;
+      }
+    }
+  }
+}
+</style>

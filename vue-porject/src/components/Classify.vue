@@ -1,16 +1,16 @@
 <template>
   <div>
     <div class="search">
-      <van-row>
+      <van-row class="search">
         <van-col span="24">
           <van-search placeholder="请输入搜索关键词" shape="round" input-align="center" />
         </van-col>
       </van-row>
     </div>
-    <div>
-      <el-row>
+    <div class="mainbox">
+      <el-row class="boxmain">
         <el-col :span="4">
-          <el-tabs tab-position="left" @tab-click="changeIdx">
+          <el-tabs class="tabbox" tab-position="left" @tab-click="changeIdx">
             <el-tab-pane
               class="tablist"
               v-for="(item,idx) in tablist"
@@ -19,7 +19,7 @@
             ></el-tab-pane>
           </el-tabs>
         </el-col>
-        <el-col :span="20">
+        <el-col class="rightbox" :span="20">
           <img :src="listdata.src" class="banner" alt />
           <p class="namebox">
             <el-divider class="titlediv">{{listdata.name}}分类</el-divider>
@@ -32,7 +32,7 @@
               v-for="type in listdata.listtop"
               :key="type.uid"
             >
-              <div class="grid-content bg-purple">
+              <div class="grid-content bg-purple" @click="gotoclassification(type)">
                 <img :src="type.imgurl" alt />
                 <h4>{{type.name}}</h4>
               </div>
@@ -62,6 +62,12 @@
   </div>
 </template>
 <script>
+import Vue from "vue";
+// import Bus from "../busforjw.js";
+import { Sidebar, SidebarItem } from "vant";
+
+Vue.use(Sidebar);
+Vue.use(SidebarItem);
 // localhost:5786/classify/?type=居家&charset=utf8
 export default {
   data() {
@@ -154,8 +160,11 @@ export default {
 
       //添加this.$forceUpdate();进行强制渲染，效果实现。网上找的还是搞不懂为什么不刷新，数据打印明明变了的，周一找林芳问下。
     },
-    goto() {
-      this.$router.push({ name: "goods" });
+    gotoclassification(asd) {
+      console.log(asd);
+      let a = asd.type;
+      let b = asd.name;
+      this.$router.push({ name: "classification", query: { a: a, b: b } });
     },
     gotodetails(id) {
       this.$router.push({ name: "details", params: { id } });
@@ -168,22 +177,58 @@ export default {
 </script>
 <style lang="scss" scoped>
 .search {
-  height: 60px;
-  border-bottom: 1px solid #ccc;
+  height: 1.146667rem;
+  border-bottom: 1px solid #dcdfe6;
+}
+.van-search {
+  height: 1.146667rem;
+  padding: 0.266667rem;
+  box-sizing: border-box;
+}
+.mainbox {
+  width: 100%;
+  position: absolute;
+  top: 1.146667rem;
+  bottom: 1.333333rem;
+  overflow: hidden;
+  .boxmain {
+    height: 100%;
+    // overflow: auto;
+    border-left: 1px solid #dcdfe6;
+    box-sizing: border-box;
+  }
+}
+.rightbox {
+  height: 100%;
+  // height: 100%;
+  overflow: auto;
+  border-left: 1px solid #dcdfe6;
+  box-sizing: border-box;
+}
+.tabbox {
+  width: 100%;
 }
 .tablist {
-  font-size: 20px;
+  font-size: 0.32rem;
   width: 100%;
 }
 .lalala {
   text-align: center;
+  // height: 100%;
+  // overflow: auto;
+  // border-left: 1px solid #dcdfe6;
 }
 .banner {
   width: 100%;
 }
 .namebox {
-  width: 300px;
+  width: 6rem;
   margin: auto;
+  font-size: 0.32rem;
+  .titlediv {
+    font-size: 0.32rem;
+    white-space: nowrap;
+  }
 }
 .fenleibox {
   width: 30%;
@@ -194,7 +239,7 @@ export default {
   }
   h4 {
     color: #000;
-    font-size: 18px;
+    font-size: 0.32rem;
     text-align: center;
     width: 100%;
     overflow: hidden;
@@ -204,8 +249,7 @@ export default {
   p {
     color: #f00;
     text-align: center;
-    font-size: 14px;
-    margin-bottom: 60px;
+    margin-bottom: 0.133333rem;
   }
 }
 </style>

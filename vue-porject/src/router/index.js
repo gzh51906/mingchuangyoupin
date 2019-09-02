@@ -8,9 +8,10 @@ import Classify from '../components/Classify.vue'
 import Special from '../components/Special.vue'
 import My from '../components/My.vue'
 import HomeClass from '../childcomponents/home/Classifys.vue'
-import Details from '../components/Details.vue'
+import Details from '../childcomponents/classify/Details.vue'
+import Classification from '../childcomponents/classify/classification.vue'
 // 安装（使用）路由
-Vue.use(VueRouter);     
+Vue.use(VueRouter);
 // 实例化router并配置参数
 let router = new VueRouter({
     // mode:'history' -> /xxx ,// 默认hash -> /#/xxx  
@@ -29,6 +30,11 @@ let router = new VueRouter({
         name: 'classify',
         path: '/classify',
         component: Classify
+    },
+    {
+        name: 'classification',
+        path: 'classification',
+        component: Classification
     },
     {
         name: 'details',
