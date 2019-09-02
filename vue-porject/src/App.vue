@@ -38,6 +38,9 @@ import "@nutui/nutui/dist/nutui.css";
 
 import { Tabbar, TabbarItem } from "vant";
 Vue.use(Tabbar).use(TabbarItem);
+
+import "../src/static/rem.js"
+
 export default {
   data() {
     return {
