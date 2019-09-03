@@ -22,7 +22,11 @@
         :name="idx"
       ></van-tab>
       <keep-alive>
-        <component :is="son"></component>
+        <component
+          :is="son"
+          v-bind:classify="classify"
+          v-bind:idxitem="idxitem"
+        ></component>
       </keep-alive>
     </van-tabs>
   </div>
@@ -48,6 +52,7 @@ export default {
     return {
       son: "Homeson",
       classify: this.$store.state.classifyIdx,
+      idxitem: "新品",
       navlist: [
         {
           title: "首页",
@@ -78,6 +83,10 @@ export default {
           to: "/home"
         },
         {
+          title: "电器",
+          to: "/home"
+        },
+        {
           title: "杂货",
           to: "/home"
         },
@@ -93,12 +102,20 @@ export default {
       this.$toast(title);
     },
     goto(a, b) {
+      this.idxitem = b;
       this.$store.commit("chanfeClassifyIdx", a);
       if (a >= 1) {
         this.son = "Classifys";
       } else {
         this.son = "Homeson";
       }
+    }
+  },
+  created() {
+    if (this.classify >= 1) {
+      this.son = "Classifys";
+    } else {
+      this.son = "Homeson";
     }
   }
 };
@@ -107,9 +124,9 @@ export default {
 .search {
   height: 1.013333rem;
   .img {
-    height: .853333rem;
+    height: 0.853333rem;
     text-align: center;
-    margin: .266667rem;
+    margin: 0.266667rem;
   }
 }
 </style>
