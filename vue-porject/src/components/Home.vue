@@ -15,13 +15,15 @@
       </van-col>
     </van-row>
     <van-tabs border line-height="2px" @click="goto" v-model="classify">
-        <van-tab
-          v-for="(item, idx) in navlist"
-          :title="item.title"
-          :key="idx"
-          :name="idx"
-        ></van-tab>
-      <Classifys :classify="classify"></Classifys>
+      <van-tab
+        v-for="(item, idx) in navlist"
+        :title="item.title"
+        :key="idx"
+        :name="idx"
+      ></van-tab>
+      <keep-alive>
+        <component :is="son"></component>
+      </keep-alive>
     </van-tabs>
   </div>
 </template>
@@ -29,6 +31,7 @@
 <script>
 import Vue from "vue";
 import { Search, Row, Col, Tab, Tabs } from "vant";
+import Homeson from "../childcomponents/home/Homeson.vue";
 import Classifys from "../childcomponents/home/Classifys.vue";
 
 Vue.use(Search)
@@ -38,10 +41,12 @@ Vue.use(Search)
   .use(Tabs);
 export default {
   components: {
+    Homeson,
     Classifys
   },
   data() {
     return {
+      son: "Homeson",
       classify: this.$store.state.classifyIdx,
       navlist: [
         {
@@ -88,18 +93,23 @@ export default {
       this.$toast(title);
     },
     goto(a, b) {
-      this.$store.commit('chanfeClassifyIdx',a);
+      this.$store.commit("chanfeClassifyIdx", a);
+      if (a >= 1) {
+        this.son = "Classifys";
+      } else {
+        this.son = "Homeson";
+      }
     }
   }
 };
 </script>
 <style lang="scss" scoped>
 .search {
-  height: 38px;
+  height: 1.013333rem;
   .img {
-    height: 32px;
+    height: .853333rem;
     text-align: center;
-    margin: 10px;
+    margin: .266667rem;
   }
 }
 </style>

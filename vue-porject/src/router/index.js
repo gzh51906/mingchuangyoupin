@@ -7,56 +7,50 @@ import Cart from '../components/Cart.vue'
 import Classify from '../components/Classify.vue'
 import Special from '../components/Special.vue'
 import My from '../components/My.vue'
-import HomeClass from '../childcomponents/home/Classifys.vue'
 import Details from '../components/Details.vue'
 // 安装（使用）路由
-Vue.use(VueRouter);     
+Vue.use(VueRouter);
 // 实例化router并配置参数
 let router = new VueRouter({
     // mode:'history' -> /xxx ,// 默认hash -> /#/xxx  
     routes: [{
-        // 当url路径为/home时渲染home组件到<router-view>上
-        name: 'home',
-        path: '/home',
-        component: Home
-    },
-    {
-        name: 'cart',
-        path: '/cart',
-        component: Cart
-    },
-    {
-        name: 'classify',
-        path: '/classify',
-        component: Classify
-    },
-    {
-        name: 'details',
-        path: '/details/:id',
-        component: Details
-    },
-    {
-        name: 'special',
-        path: '/special',
-        component: Special
-    },
-    {
-        name: 'my',
-        path: '/my',
-        component: My
-    },
-    {
-        name: 'homeclass',
-        path: '/homeclass/:id',
-        component: HomeClass
-    },
-    {
-        // 当浏览器路径为/时，重定向到/home
-        path: '/',
-        redirect: {
-            name: 'home'
+            // 当url路径为/home时渲染home组件到<router-view>上
+            name: 'home',
+            path: '/home',
+            component: Home
+        },
+        {
+            name: 'cart',
+            path: '/cart',
+            component: Cart
+        },
+        {
+            name: 'classify',
+            path: '/classify',
+            component: Classify
+        },
+        {
+            name: 'details',
+            path: '/details/:id',
+            component: Details
+        },
+        {
+            name: 'special',
+            path: '/special',
+            component: Special
+        },
+        {
+            name: 'my',
+            path: '/my',
+            component: My
+        },
+        {
+            // 当浏览器路径为/时，重定向到/home
+            path: '/',
+            redirect: {
+                name: 'home'
+            }
         }
-    }
     ]
 })
 

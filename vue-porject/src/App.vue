@@ -6,7 +6,6 @@
       active-color="#D9232E"
       inactive-color="#7F7F7F"
       route
-      fixed
       class="tabbar"
     >
       <van-tabbar-item
