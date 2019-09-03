@@ -74,12 +74,78 @@
               <img :src="item.imgurl" alt="" />
             </div>
             <div class="info">
-              <p class="name">{{item.title}}</p>
-              <p class="desc">{{item.desc}}</p>
-              <p class="price "><span>{{item.price}}</span></p>
+              <p class="name">{{ item.title }}</p>
+              <p class="desc">{{ item.desc }}</p>
+              <p class="price ">
+                <span>{{ item.price }}</span>
+              </p>
             </div>
           </a>
         </div>
+      </div>
+    </div>
+    <div class="box"></div>
+    <div class="hotlist">
+      <div class="hotlist-p">
+        人气推荐
+      </div>
+      <div class="hotlist-box">
+        <ul>
+          <li class="item" v-for="item in hotlist" :key="item.id">
+            <a href="" class="clearfix" @click.prevent="goto(item.id)">
+              <div class="pic">
+                <div>
+                  <img :src="item.imgurl" />
+                </div>
+              </div>
+              <div class="info">
+                <p class="name">{{ item.title }}</p>
+                <p class="brief">{{ item.brief }}</p>
+                <p class="price ">
+                  <span>{{ item.price }}</span>
+                </p>
+              </div>
+            </a>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <div class="box"></div>
+    <div class="ztjx">
+      <div class="ztjx-p">专题精选</div>
+      <img src="../../images/1-1P3131F2180-L.jpg" alt="" />
+      <div class="info">
+        <div class="line1">
+          <h4>MINISO白色情人节</h4>
+          <p class="price">¥ <span>7</span>起</p>
+        </div>
+        <div class="desc">味蕾替我说爱你</div>
+      </div>
+    </div>
+    <div class="box"></div>
+    <div class="likelist">
+      <div class="likelist-p">猜你喜欢</div>
+      <div class="likelist-box">
+        <a
+          href=""
+          v-for="item in hotlist"
+          :key="item.id"
+          class="ms-product-item"
+          @click.prevent="goto(item.id)"
+        >
+          <div class="pic ">
+            <div>
+              <img :src="item.imgurl" />
+            </div>
+          </div>
+          <div class="info">
+            <p class="brief">{{ item.brief }}</p>
+            <p class="name">{{ item.title }}</p>
+            <p class="price ">
+              <span>{{ item.price }}</span>
+            </p>
+          </div>
+        </a>
       </div>
     </div>
     <div class="border"></div>
@@ -89,6 +155,7 @@
 <script>
 import Vue from "vue";
 import { Swipe, SwipeItem, Row, Col, Icon, Grid, GridItem } from "vant";
+import { log } from 'util';
 
 Vue.use(Swipe)
   .use(SwipeItem)
@@ -98,11 +165,11 @@ Vue.use(Swipe)
   .use(Grid)
   .use(GridItem);
 export default {
-  props: ["classify"],
   data() {
     return {
       brand: [],
-      newlist: []
+      newlist: [],
+      hotlist: []
     };
   },
   methods: {
@@ -116,6 +183,9 @@ export default {
     });
     this.$axios.get("http://localhost:5786/home/xpsf").then(res => {
       this.newlist = res.data.data.tuijian;
+    });
+    this.$axios.get("http://localhost:5786/home/rptj").then(res => {
+      this.hotlist = res.data.data.tuijian;
     });
   }
 };
@@ -229,24 +299,148 @@ export default {
               width: 3.4rem;
             }
           }
-          .info{
-            .name{
+          .info {
+            .name {
               font-size: 15px;
               width: 3.4rem;
               overflow: hidden;
               color: #333;
               text-overflow: ellipsis;
               white-space: nowrap;
-              margin-top: .066667rem;
+              margin-top: 0.066667rem;
             }
-            .desc{
+            .desc {
               color: #7f7f7f;
-              margin: .05rem 0px .05rem 0px;
+              margin: 0.05rem 0px 0.05rem 0px;
             }
-            .price span{
+            .price span {
               color: #d9232e;
               font-size: 14px;
             }
+          }
+        }
+      }
+    }
+  }
+  .hotlist {
+    .hotlist-p {
+      margin: 0;
+      height: 1.133333rem;
+      text-align: center;
+      line-height: 1.133333rem;
+      color: #333;
+      font-size: 16px;
+    }
+    .hotlist-box {
+      ul li a {
+        border: 1px solid #ccc;
+        display: flex;
+        margin: 0.25rem;
+        padding: 0.45rem 0.36rem;
+        .pic img {
+          width: 3rem;
+          height: 3rem;
+        }
+        .info {
+          margin-left: 0.586667rem;
+          .name {
+            font-size: 15px;
+            color: #333;
+            width: 5.333333rem;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            margin-top: 0.656667rem;
+          }
+          .brief {
+            margin-top: 0.083333rem;
+            font-size: 14px;
+            color: #7f7f7f;
+            margin-bottom: 0.233333rem;
+          }
+          .price span {
+            color: #d9232e;
+            font-size: 14px;
+          }
+        }
+      }
+    }
+  }
+  .ztjx {
+    .ztjx-p {
+      margin: 0;
+      height: 1.133333rem;
+      text-align: center;
+      line-height: 1.133333rem;
+      color: #333;
+      font-size: 16px;
+    }
+    img {
+      height: 5.6rem;
+      width: 10rem;
+    }
+    .info {
+      padding: 0.293333rem 0.4rem;
+      .line1 {
+        display: flex;
+        justify-content: space-between;
+        h4 {
+          font-size: 20px;
+        }
+        p {
+          color: #d9232e;
+          font-size: 16px;
+        }
+      }
+      .desc {
+        color: #7f7f7f;
+        font-size: 16px;
+      }
+    }
+  }
+  .likelist {
+    .likelist-p {
+      margin: 0;
+      height: 1.133333rem;
+      text-align: center;
+      line-height: 1.133333rem;
+      color: #333;
+      font-size: 16px;
+    }
+    .likelist-box {
+      display: flex;
+      flex-wrap: wrap;
+      padding: .126667rem;
+      justify-content: space-around;
+      a {
+        width: 4.702667rem;
+        margin-bottom: .066667rem;
+        .pic {
+          img {
+            width: 4.702667rem;
+            height: 4.702667rem;
+            background-color: rgb(247, 247, 247);
+          }
+        }
+        .info{
+          .brief{
+            color: #7f7f7f;
+            padding: .133333rem .173333rem;
+            background-color: #eaeaea;    
+          }
+          .name{
+            color: #333;
+            font-size: 16px;
+            width: 4.702667rem;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            margin: .133333rem 0 .02rem;
+          }
+          .price span{
+            color: #d9232e;
+            font-size: 17px;
+            margin-top: .066667rem;
           }
         }
       }
