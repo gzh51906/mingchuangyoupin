@@ -7,6 +7,9 @@ module.exports = {
       libraryName: 'vant',
       libraryDirectory: 'es',
       style: true
-    }, 'vant']
+    }, 'vant'],
+    ["@nutui/babel-plugin-separate-import", {
+      "style": "css"
+    }]
   ]
 }

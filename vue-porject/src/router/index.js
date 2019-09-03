@@ -16,53 +16,53 @@ Vue.use(VueRouter);
 let router = new VueRouter({
     // mode:'history' -> /xxx ,// 默认hash -> /#/xxx  
     routes: [{
-        // 当url路径为/home时渲染home组件到<router-view>上
-        name: 'home',
-        path: '/home',
-        component: Home
-    },
-    {
-        name: 'cart',
-        path: '/cart',
-        component: Cart
-    },
-    {
-        name: 'classify',
-        path: '/classify',
-        component: Classify
-    },
-    {
-        name: 'classification',
-        path: 'classification',
-        component: Classification
-    },
-    {
-        name: 'details',
-        path: '/details/:id',
-        component: Details
-    },
-    {
-        name: 'special',
-        path: '/special',
-        component: Special
-    },
-    {
-        name: 'my',
-        path: '/my',
-        component: My
-    },
-    {
-        name: 'homeclass',
-        path: '/homeclass/:id',
-        component: HomeClass
-    },
-    {
-        // 当浏览器路径为/时，重定向到/home
-        path: '/',
-        redirect: {
-            name: 'home'
+            // 当url路径为/home时渲染home组件到<router-view>上
+            name: 'home',
+            path: '/home',
+            component: Home
+        },
+        {
+            name: 'cart',
+            path: '/cart',
+            component: Cart
+        },
+        {
+            name: 'classify',
+            path: '/classify',
+            component: Classify
+        },
+        {
+            name: 'classification',
+            path: 'classification',
+            component: Classification
+        },
+        {
+            name: 'details',
+            path: '/details/:id',
+            component: Details
+        },
+        {
+            name: 'special',
+            path: '/special',
+            component: Special
+        },
+        {
+            name: 'my',
+            path: '/my',
+            component: My
+        },
+        {
+            name: 'homeclass',
+            path: '/homeclass/:id',
+            component: HomeClass
+        },
+        {
+            // 当浏览器路径为/时，重定向到/home
+            path: '/',
+            redirect: {
+                name: 'home'
+            }
         }
-    }
     ]
 })
 
