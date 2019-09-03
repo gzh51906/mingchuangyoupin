@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="search">
+    <div class="search" @click="gosearch">
       <van-row class="search">
         <van-col span="24">
           <van-search placeholder="请输入搜索关键词" shape="round" input-align="center" />
@@ -49,8 +49,8 @@
               v-for="type in listdata.listbot"
               :key="type.uid"
             >
-              <div class="grid-content bg-purple" @click="gotodetails(type.uid)">
-                <img :src="type.imgsrc" alt />
+              <div class="grid-content bg-purple" @click="gotodetails(type.id)">
+                <img :src="type.imgurl" alt />
                 <h4>{{type.title}}</h4>
                 <p>￥{{type.price}}</p>
               </div>
@@ -146,6 +146,7 @@ export default {
 
       this.listdata.listtop = data.data.fenlei;
       this.listdata.listbot = data.data.tuijian;
+      //select * from tableName order by rand() limit N
       this.$forceUpdate();
       // console.log(this.listdata);
     },
@@ -161,13 +162,20 @@ export default {
       //添加this.$forceUpdate();进行强制渲染，效果实现。网上找的还是搞不懂为什么不刷新，数据打印明明变了的，周一找林芳问下。
     },
     gotoclassification(asd) {
-      console.log(asd);
+      // console.log(asd);
       let a = asd.type;
       let b = asd.name;
-      this.$router.push({ name: "classification", query: { a: a, b: b } });
+      let c = asd.uid;
+      this.$router.push({
+        name: "classification",
+        query: { a: a, b: b, c: c }
+      });
     },
     gotodetails(id) {
       this.$router.push({ name: "details", params: { id } });
+    },
+    gosearch() {
+      this.$router.push({ name: "searchjw" });
     }
   },
   created() {

@@ -16,7 +16,7 @@ Router.route('/').get(async (req, res) => {
     let result;
     try {
         let data = {}
-        data.tuijian = await mysql(`select * from tuijian where type = '${type}'`)
+        data.tuijian = await mysql(`select * from goods order by rand() limit 6`)
         data.fenlei = await mysql(`select * from fenlei where type = '${type}'`)
         result = formatData({ data });
     } catch (err) {

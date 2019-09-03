@@ -9,23 +9,23 @@
           <h3>{{this.name}}</h3>
         </el-col>
         <el-col :span="6">
-          <i class="icon2 el-icon-shopping-cart-1"></i>
-          <i class="icon2 el-icon-search"></i>
+          <i class="icon2 el-icon-shopping-cart-1" @click="gocart"></i>
+          <i class="icon2 el-icon-search" @click="gosearch"></i>
         </el-col>
       </el-row>
     </header>
     <nav>
-      <ul>
-        <!-- <li v-for="item in "></li> -->
-      </ul>
+      <van-tabs border line-height="2px" v-model="active" @click="onClick">
+        <van-tab v-for="(item,idx) in tab.listtop" :key="idx" :title="item.name"></van-tab>
+      </van-tabs>
     </nav>
     <main>
       <el-row class="list" :gutter="20">
         <el-col :span="12" v-for="(item,idx) in tab.listbot" :key="idx">
-          <div class="grid-content bg-purple">
-            <img :src="item.imgsrc" alt />
+          <div class="grid-content bg-purple" :id="item.id" @click="gotodetails(item.id)">
+            <img :src="item.imgurl" alt />
             <h4>{{item.title}}</h4>
-            <p>￥{{item.price}}</p>
+            <p>{{item.price}}</p>
           </div>
         </el-col>
       </el-row>
@@ -36,17 +36,20 @@
 <script>
 import Vue from "vue";
 // import Bus from "../../busforjw.js";
-import { Swipe, SwipeItem, Stepper, Grid, GridItem } from "vant";
+import { Swipe, SwipeItem, Stepper, Grid, GridItem, Tab, Tabs } from "vant";
 import { Script } from "vm";
 
 Vue.use(Swipe)
   .use(SwipeItem)
   .use(Stepper)
   .use(Grid)
-  .use(GridItem);
+  .use(GridItem)
+  .use(Tab)
+  .use(Tabs);
 export default {
   data() {
     return {
+      active: "",
       type: "",
       name: "",
       tab: {}
@@ -55,13 +58,30 @@ export default {
   created() {
     this.type = this.$route.query.a;
     this.name = this.$route.query.b;
+    this.active = this.$route.query.c - 1;
     // this.getRouterData();
     this.getlistdata();
+    this.getlistdatabot(this.name);
   },
   methods: {
+    gocart() {
+      this.$router.push({ name: "cart" });
+    },
+    onClick(name, title) {
+      // console.log(name, title);
+
+      this.active = name;
+      this.getlistdatabot(title);
+    },
+    gotodetails(id) {
+      this.$router.push({ name: "details", params: { id } });
+    },
     getRouterData() {},
     gohome() {
       this.$router.push({ name: "home" });
+    },
+    gosearch() {
+      this.$router.push({ name: "searchjw" });
     },
     async getlistdata() {
       let { data } = await this.$axios.get("http://localhost:5786/classify/", {
@@ -71,7 +91,24 @@ export default {
         }
       });
       this.tab.listtop = data.data.fenlei;
+      // console.log(this.tab.listtop);
+
+      this.$forceUpdate();
+    },
+    async getlistdatabot(name) {
+      let { data } = await this.$axios.get(
+        "http://localhost:5786/classifiaction/",
+        {
+          params: {
+            category: name,
+            charset: "utf8"
+          }
+        }
+      );
+      // console.log(this.name, data);
       this.tab.listbot = data.data.tuijian;
+
+      // this.tab.listbot = data.data;
       this.$forceUpdate();
     }
   }
@@ -125,12 +162,17 @@ header {
     }
   }
 }
+nav {
+  position: absolute;
+  top: 1.166667rem;
+  width: 100%;
+}
 main {
-  background: #effeee;
+  background: #effeef;
   margin: auto;
   width: 10rem;
   position: absolute;
-  top: 1.173333rem;
+  top: 2.266667rem;
   bottom: 1.466667rem;
   overflow: auto;
   .list {

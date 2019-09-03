@@ -1,58 +1,42 @@
 <template>
   <div class="homeson">
     <van-swipe :autoplay="2000" indicator-color="white" class="swipe" touchable>
-      <van-swipe-item
-        ><img
+      <van-swipe-item>
+        <img
           src="http://s1.hgcang.com/bsimg/ec/public/images/6b/13/6b13fe91df1be087bdcff2f52ce99579.jpg?x-oss-process=style/high"
-          alt=""
-      /></van-swipe-item>
-      <van-swipe-item
-        ><img
+          alt
+        />
+      </van-swipe-item>
+      <van-swipe-item>
+        <img
           src="http://s2.hgcang.com/bsimg/ec/public/images/b9/93/b993931520c90ea420dd6e4a6235e194.jpg?x-oss-process=style/high"
-          alt=""
-      /></van-swipe-item>
+          alt
+        />
+      </van-swipe-item>
     </van-swipe>
     <van-row class="iconsize">
       <van-col span="8">
-        <van-icon
-          color="red"
-          size="14px"
-          name="flower-o"
-        />名创优品自营</van-col
-      >
+        <van-icon color="red" size="14px" name="flower-o" />名创优品自营
+      </van-col>
       <van-col span="8">
-        <van-icon
-          color="red"
-          size="14px"
-          name="flower-o"
-        />30天无忧退货</van-col
-      >
+        <van-icon color="red" size="14px" name="flower-o" />30天无忧退货
+      </van-col>
       <van-col span="8">
-        <van-icon
-          color="red"
-          size="14px"
-          name="flower-o"
-        />2个工作日退款</van-col
-      >
+        <van-icon color="red" size="14px" name="flower-o" />2个工作日退款
+      </van-col>
     </van-row>
     <div class="box"></div>
     <div class="brand">
       <p class="brand-p">品牌甄选</p>
       <div class="brand-box">
-        <a
-          href=""
-          v-for="item in brand"
-          :key="item.url"
-          @click.prevent="goto(item.id)"
-        >
+        <a href v-for="item in brand" :key="item.url" @click.prevent="goto(item.id)">
           <div class="pic">
-            <img :src="item.imgurl" alt="" />
+            <img :src="item.imgurl" alt />
           </div>
           <div class="desc">
             <p class="name">{{ item.title }}</p>
             <p class="price">
-              <span>{{ item.price }}</span
-              >元起
+              <span>{{ item.price }}</span>元起
             </p>
             <span class="tag">{{ item.tag }}</span>
           </div>
@@ -64,19 +48,16 @@
       <p class="newlist-p">新品首发</p>
       <div class="newlist-dx">
         <div class="newlist-box">
-          <a
-            href=""
-            v-for="item in newlist"
-            :key="item.id"
-            @click.prevent="goto(item.id)"
-          >
+          <a href v-for="item in newlist" :key="item.id" @click.prevent="goto(item.id)">
             <div class="pic">
-              <img :src="item.imgurl" alt="" />
+              <img :src="item.imgurl" alt />
             </div>
             <div class="info">
               <p class="name">{{item.title}}</p>
               <p class="desc">{{item.desc}}</p>
-              <p class="price "><span>{{item.price}}</span></p>
+              <p class="price">
+                <span>{{item.price}}</span>
+              </p>
             </div>
           </a>
         </div>
@@ -229,21 +210,21 @@ export default {
               width: 3.4rem;
             }
           }
-          .info{
-            .name{
+          .info {
+            .name {
               font-size: 15px;
               width: 3.4rem;
               overflow: hidden;
               color: #333;
               text-overflow: ellipsis;
               white-space: nowrap;
-              margin-top: .066667rem;
+              margin-top: 0.066667rem;
             }
-            .desc{
+            .desc {
               color: #7f7f7f;
-              margin: .05rem 0px .05rem 0px;
+              margin: 0.05rem 0px 0.05rem 0px;
             }
-            .price span{
+            .price span {
               color: #d9232e;
               font-size: 14px;
             }

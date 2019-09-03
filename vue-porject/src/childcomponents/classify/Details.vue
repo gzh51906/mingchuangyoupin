@@ -9,31 +9,31 @@
           <h3>{{data.title}}</h3>
         </el-col>
         <el-col :span="6">
-          <i class="icon2 el-icon-shopping-cart-1"></i>
-          <i class="icon2 el-icon-search"></i>
+          <i class="icon2 el-icon-shopping-cart-1" @click="gocart"></i>
+          <i class="icon2 el-icon-search" @click="gosearch"></i>
         </el-col>
       </el-row>
     </header>
     <main>
       <van-swipe :autoplay="3000" indicator-color="#ff0000">
         <van-swipe-item>
-          <img :src="data.imgsrc" alt />
+          <img :src="data.imgurl" alt />
         </van-swipe-item>
         <van-swipe-item>
-          <img :src="data.imgsrc" alt />
+          <img :src="data.imgurl" alt />
         </van-swipe-item>
         <van-swipe-item>
-          <img :src="data.imgsrc" alt />
+          <img :src="data.imgurl" alt />
         </van-swipe-item>
       </van-swipe>
       <div class="price">
         <el-row class="pricebox">
           <el-col class="boxleft" :span="17">
             <h4>{{data.title}}</h4>
-            <p>质量有保证，买了更放心</p>
+            <p>{{data.brief}}</p>
             <p>
-              <span>￥{{data.price}}</span>
-              <del>￥{{data.price}}</del>
+              <span>{{data.price}}</span>
+              <del>{{data.price}}</del>
             </p>
           </el-col>
           <el-col class="boxright" style="border-left:1px solid #ccc" :span="7">
@@ -111,10 +111,10 @@
       </div>
       <el-row class="tuijianlist" :gutter="20">
         <el-col :span="12" v-for="(item,idx) in goodlist" :key="idx">
-          <div class="grid-content bg-purple" @click="updatedetails(item.uid)">
-            <img :src="item.imgsrc" alt />
+          <div class="grid-content bg-purple" @click="updatedetails(item.id)">
+            <img :src="item.imgurl" alt />
             <h4>{{item.title}}</h4>
-            <p>￥{{item.price}}</p>
+            <p>{{item.price}}</p>
           </div>
         </el-col>
       </el-row>
@@ -128,10 +128,10 @@
           <i class="el-icon-star-off"></i>
         </el-col>
         <el-col :span="8">
-          <div class="btnwhite">立即购买</div>
+          <div class="btnwhite" @click="gocartandadd">立即购买</div>
         </el-col>
         <el-col :span="8">
-          <div class="btnwhite btnred">加入购物车</div>
+          <div class="btnwhite btnred" @click="add2cart">加入购物车</div>
         </el-col>
       </el-row>
     </footer>
@@ -141,6 +141,7 @@
 <script>
 import Vue from "vue";
 import { Swipe, SwipeItem, Stepper, Grid, GridItem } from "vant";
+// import { lookup } from "dns";
 
 Vue.use(Swipe)
   .use(SwipeItem)
@@ -160,8 +161,18 @@ export default {
     this.getData(id);
   },
   methods: {
+    gocartandadd() {
+      this.gocart();
+      this.add2cart();
+    },
+    gocart() {
+      this.$router.push({ name: "cart" });
+    },
     gohome() {
       this.$router.push({ name: "home" });
+    },
+    gosearch() {
+      this.$router.push({ name: "searchjw" });
     },
     updatedetails(id) {
       this.value = 1;
@@ -195,9 +206,34 @@ export default {
       });
       // this.listdata.listtop = data.data.fenlei;
       this.goodlist = data.data.tuijian;
-      console.log(this.goodlist);
+      // console.log(this.goodlist);
 
       // this.$forceUpdate();
+    },
+    add2cart() {
+      // console.log(this.data);
+      let { id, imgurl, price, title } = this.data;
+      let { cartlist } = this.$store.state.cart;
+
+      let hasItem = cartlist.filter(function(item) {
+        return item.id === id;
+      })[0];
+      if (hasItem) {
+        this.$store.commit("changeqty", {
+          id: id,
+          qty: hasItem.qty + this.value
+        });
+      } else {
+        this.$store.commit("additem", {
+          id,
+          imgurl,
+          price: Number(price.substr(1)),
+          title,
+          qty: this.value,
+          ischeck: true
+        });
+      }
+      // console.log(this.$store.state.cart.cartlist);
     }
   }
 };
