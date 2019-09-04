@@ -37,10 +37,6 @@ let router = new VueRouter({
         name: 'classification',
         path: 'classification',
         component: Classification
-    }, {
-        name: 'searchjw',
-        path: '/searchjw',
-        component: Searchjw
     },
     {
         name: 'details',
@@ -67,13 +63,17 @@ let router = new VueRouter({
         component: Reg
     },
     {
+        name: 'searchjw',
+        path: '/searchjw',
+        component: Searchjw
+    },
+    {
         // 当浏览器路径为/时，重定向到/home
         path: '/',
         redirect: {
             name: 'home'
         }
     }
-
     ]
 })
 

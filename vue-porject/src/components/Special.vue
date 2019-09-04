@@ -67,9 +67,10 @@ export default {
   }
 };
 </script>
-<style lang="scss" scoped>
-.app {
-  height: 120rem;
+<style scoped>
+.app{
+    height: 120rem;
+    
 }
 .ms {
   display: block;
