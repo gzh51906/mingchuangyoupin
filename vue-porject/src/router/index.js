@@ -7,6 +7,7 @@ import Cart from '../components/Cart.vue'
 import Classify from '../components/Classify.vue'
 import Special from '../components/Special.vue'
 import My from '../components/My.vue'
+import Reg from '../components/Reg.vue'
 import HomeClass from '../childcomponents/home/Classifys.vue'
 import Details from '../childcomponents/classify/Details.vue'
 import Classification from '../childcomponents/classify/classification.vue'
@@ -55,6 +56,10 @@ let router = new VueRouter({
             name: 'homeclass',
             path: '/homeclass/:id',
             component: HomeClass
+        },{
+            name: 'reg',
+            path: '/reg',
+            component: Reg
         },
         {
             // 当浏览器路径为/时，重定向到/home
