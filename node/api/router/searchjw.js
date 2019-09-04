@@ -4,13 +4,12 @@ const mysql = require('../db/mysql');
 const { formatData } = require('../utils/index');
 Router.route('/').get(async (req, res) => {
 
-    let { uid } = req.query;
-    // console.log(type);
+    let { text } = req.query;
+    console.log(text);
     let result;
     try {
         let data = {}
-        data.tuijian = await mysql(`select * from goods where id = ${uid}`)
-        // data.fenlei = await mysql(`select * from fenlei where id = '${id}'`)
+        data.suju = await mysql(`select * from  goods where  title like  '%${text}%' limit 0 , 30`);
         result = formatData({ data });
     } catch (err) {
         result = formatData({ code: 0, data: err });
