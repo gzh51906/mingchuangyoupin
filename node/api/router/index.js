@@ -7,6 +7,7 @@ const classifiaction = require('./classifiaction')
 const home = require('./home');
 const special = require('./special')
 const searchjw = require('./searchjw')
+const rms = require('./rms')
 Router.use(express.json(), express.urlencoded({ extended: false }));
 Router.use('/classify', goodsRouter);
 Router.use('/detialsjw', detialsjw);
@@ -14,6 +15,7 @@ Router.use('/classifiaction', classifiaction);
 Router.use('/searchjw', searchjw);
 Router.use('/home', home);
 Router.use('/special',special);
+Router.use('/rms',rms);
 
 module.exports = Router;
 
