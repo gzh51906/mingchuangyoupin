@@ -264,7 +264,7 @@ export default {
       overflow: hidden;
       overflow-x: auto;
       .newlist-box {
-        width: 42.333333rem;
+        width: 45.333333rem;
         a {
           display: inline-block;
           margin-left: 0.4rem;
@@ -355,7 +355,7 @@ export default {
     }
     img {
       height: 5.6rem;
-      width: 10rem;
+      width: 9rem;
     }
     .info {
       padding: 0.293333rem 0.4rem;

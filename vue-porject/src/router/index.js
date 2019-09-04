@@ -18,7 +18,6 @@ Vue.use(VueRouter);
 let router = new VueRouter({
     // mode:'history' -> /xxx ,// 默认hash -> /#/xxx  
     routes: [{
-<<<<<<< HEAD
             // 当url路径为/home时渲染home组件到<router-view>上
             name: 'home',
             path: '/home',
@@ -58,10 +57,15 @@ let router = new VueRouter({
             name: 'homeclass',
             path: '/homeclass/:id',
             component: HomeClass
-        },{
+        }, {
             name: 'reg',
             path: '/reg',
             component: Reg
+        },
+        {
+            name: 'searchjw',
+            path: '/searchjw',
+            component: Searchjw
         },
         {
             // 当浏览器路径为/时，重定向到/home
@@ -69,57 +73,7 @@ let router = new VueRouter({
             redirect: {
                 name: 'home'
             }
-=======
-        // 当url路径为/home时渲染home组件到<router-view>上
-z
-    {
-        name: 'cart',
-        path: '/cart',
-        component: Cart
-    },
-    {
-        name: 'classify',
-        path: '/classify',
-        component: Classify
-    },
-    {
-        name: 'classification',
-        path: 'classification',
-        component: Classification
-    },
-    {
-        name: 'details',
-        path: '/details/:id',
-        component: Details
-    },
-    {
-        name: 'searchjw',
-        path: '/searchjw',
-        component: Searchjw
-    },
-    {
-        name: 'special',
-        path: '/special',
-        component: Special
-    },
-    {
-        name: 'my',
-        path: '/my',
-        component: My
-    },
-    {
-        name: 'homeclass',
-        path: '/homeclass/:id',
-        component: HomeClass
-    },
-    {
-        // 当浏览器路径为/时，重定向到/home
-        path: '/',
-        redirect: {
-            name: 'home'
->>>>>>> c2167ee480b268f3cbf192312fe4542d16eaf844
         }
-    }
     ]
 })
 
