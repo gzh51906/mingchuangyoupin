@@ -2,31 +2,18 @@
   <div class="search">
     <van-row>
       <van-col span="5">
-        <router-link to="/home"
-          ><img class="img" src="../images/db4828be9abfbb1ef95e8b9e7028aa30.png"
-        /></router-link>
+        <router-link to="/home">
+          <img class="img" src="../images/db4828be9abfbb1ef95e8b9e7028aa30.png" />
+        </router-link>
       </van-col>
       <van-col span="18">
-        <van-search
-          placeholder="请输入搜索关键词"
-          shape="round"
-          input-align="center"
-        />
+        <van-search placeholder="请输入搜索关键词" shape="round" input-align="center" />
       </van-col>
     </van-row>
     <van-tabs border line-height="2px" @click="goto" v-model="classify">
-      <van-tab
-        v-for="(item, idx) in navlist"
-        :title="item.title"
-        :key="idx"
-        :name="idx"
-      ></van-tab>
+      <van-tab v-for="(item, idx) in navlist" :title="item.title" :key="idx" :name="idx"></van-tab>
       <keep-alive>
-        <component
-          :is="son"
-          v-bind:classify="classify"
-          v-bind:idxitem="idxitem"
-        ></component>
+        <component :is="son" v-bind:classify="classify" v-bind:idxitem="idxitem"></component>
       </keep-alive>
     </van-tabs>
   </div>

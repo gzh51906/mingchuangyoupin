@@ -48,7 +48,7 @@ Vue.use(Field);
 Vue.use(NavBar);
 export default {};
 </script>
-<style>
+<style lang="scss" scoped>
 .Login{
     background: #f4f4f4;
     height: 17.5rem;
