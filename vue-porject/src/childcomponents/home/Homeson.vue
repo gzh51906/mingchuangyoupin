@@ -53,18 +53,10 @@
               <img :src="item.imgurl" alt />
             </div>
             <div class="info">
-<<<<<<< HEAD
-              <p class="name">{{item.title}}</p>
-              <p class="desc">{{item.desc}}</p>
-              <p class="price">
-                <span>{{item.price}}</span>
-=======
               <p class="name">{{ item.title }}</p>
               <p class="desc">{{ item.desc }}</p>
               <p class="price ">
-                <span>{{ item.price }}</span>
->>>>>>> 16f8406efefacc3531f8bbbd19f6e01ab8018dc7
-              </p>
+                <span>{{ item.price }}</span>   </p>
             </div>
           </a>
         </div>
