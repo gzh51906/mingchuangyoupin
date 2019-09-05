@@ -110,9 +110,9 @@ Vue.use(Button);
 export default {
   
    data() {
-     console.log(this.$route.query.username)
+     console.log(localStorage.getItem("username"))
     return {
-      username:this.$route.query.username*1,
+      username:localStorage.getItem("username"),
       show: false
     }
   },

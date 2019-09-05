@@ -45,7 +45,8 @@ import { NavBar } from "vant";
 import { Field } from "vant";
 import { Cell, CellGroup } from "vant";
 import { Dialog } from "vant";
-
+import "../static/jquery-3.4.1"
+import "../static/md5"
 // 全局注册
 Vue.use(Dialog);
 Vue.use(Cell).use(CellGroup);
@@ -66,10 +67,11 @@ export default {
           message: "账号不能为空"
         });
       } else {
+        let password = $.md5(this.password)
         this.$axios
           .post("http://localhost:5786/login", {
             username: this.phone,
-            password: this.password
+            password: password
           })
           .then(res => {
             console.log(res.data);
@@ -84,6 +86,7 @@ export default {
                 message: "密码错误"
               });
             }else if(res.data == "登陆成功"){
+                localStorage.setItem("username",this.phonep)
                 this.$dialog.alert({
                 title: "提示",
                 message: "登陆成功"

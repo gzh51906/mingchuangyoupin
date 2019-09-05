@@ -27,7 +27,17 @@ let router = new VueRouter({
     {
         name: 'cart',
         path: '/cart',
-        component: Cart
+        component: Cart,
+        beforeEnter:(to,from,next)=>{
+            if(localStorage.getItem("username") == null){
+                next({
+                    path:'/login'
+                })
+            }else{
+                next();
+
+            }
+        }
     },
     {
         name: 'classify',
@@ -52,7 +62,17 @@ let router = new VueRouter({
     {
         name: 'my',
         path: '/my',
-        component: My
+        component: My,
+        beforeEnter:(to,from,next)=>{
+            if(localStorage.getItem("username") == null){
+                next({
+                    path:'/login'
+                })
+            }else{
+                next();
+
+            }
+        }
     },
     {
         name: 'homeclass',
@@ -81,7 +101,11 @@ let router = new VueRouter({
     },{
         name:'login',
         path:'/login',
-        component:Login
+        component:Login,
+        beforeEnter:(to,from,next)=>{
+            localStorage.clear();
+            next();
+        }
     },
     {
         // 当浏览器路径为/时，重定向到/home
