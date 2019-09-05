@@ -10,11 +10,24 @@ let router = new VueRouter({
     routes: [{
         name: 'home',
         path: '/home',
-        component: Home
+        component: Home,
+        beforeEnter: (to, from, next) => {
+            if (localStorage.getItem("user") == null) {
+                next({
+                    path: '/reg'
+                });
+            } else {
+                next();
+            }
+        }
     }, {
         name: 'reg',
         path: '/reg',
-        component: Reg
+        component: Reg,
+        beforeEnter: (to, from, next) => {
+            localStorage.clear();
+            next();
+        }
     }, {
         path: '/',
         redirect: {

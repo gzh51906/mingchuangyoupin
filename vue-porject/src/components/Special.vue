@@ -18,29 +18,41 @@
         />
       </van-col>
     </van-row>
-    <a href="#" class="ms" v-for="(item,idx)in spclist" :key="idx">
+    <a href="#" class="ms" v-for="(item,idx) in spclist" :key="idx">
       <div class="author">
         <div class="pic">
-          <van-image class="sign" round width="1rem" height="1rem" v-bind:src="item.pic" />
-          <p>{{item.picp}}</p>
+          <van-image
+            class="sign"
+            round
+            width="1rem"
+            height="1rem"
+            v-bind:src="item.pic"
+          />
+          <p>{{ item.picp }}</p>
         </div>
       </div>
-      <van-image width="9.5rem" height="5.5rem" class="lazy" v-bind:src="item.img" />
+      <van-image
+        width="9.5rem"
+        height="5.5rem"
+        class="lazy"
+        v-bind:src="item.img"
+      />
       <div class="info">
         <van-row type="flex" justify="space-between" class="tit">
           <van-col span="18">
             <div class="line">
-              <h4>{{item.line}}</h4>
+              <h4>{{ item.line }}</h4>
             </div>
           </van-col>
           <van-col span="5">
             <p class="price">
               &yen;
-              <span>{{item.price}}</span>起
+              <span>{{ item.price }}</span
+              >起
             </p>
           </van-col>
         </van-row>
-        <div class="desc">{{item.desc}}</div>
+        <div class="desc">{{ item.desc }}</div>
       </div>
     </a>
   </div>
@@ -62,20 +74,13 @@ export default {
   created() {
     this.$axios.get("http://localhost:5786/special").then(res => {
       this.spclist = res.data.data.spe;
-<<<<<<< HEAD
-      // console.log(this.spclist);
-        
-=======
-      console.log(this.spclist);
->>>>>>> 3fc5cb1e826556b3baf8338f0bf1cfb54b592872
     });
   }
 };
 </script>
 <style scoped>
-.app{
-    height: 120rem;
-    
+.app {
+  height: 120rem;
 }
 .ms {
   display: block;

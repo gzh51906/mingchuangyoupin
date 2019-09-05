@@ -45,15 +45,23 @@ export default {
             alert("账号密码不能为空！")
         }else{
             let passwordMD5 = $.md5(this.password);
-            console.log(passwordMD5);
             this.$axios.post("http://localhost:5786/rms",{
-                password:this.passwordMD5,
-                username:this.username
+              username:this.username,
+              password:passwordMD5
             }).then(res =>{
-                console.log(res);
+              if(res.data == "用户名不存在"){
+                alert("对不起，用户名不存在！")
+                this.username = "";
+                this.password = "";
+              }else if(res.data == "密码错误"){
+                alert("对不起，密码错误，请重新输入！")
+                this.password = "";
+              }else if(res.data == "登录成功"){
+                console.log("ok");
+                localStorage.setItem("user",this.username)
+                this.$router.push({name:'home'})
+              }
             })
-
-            // this.$router.push({name:"home"})
         }
     }
   }
