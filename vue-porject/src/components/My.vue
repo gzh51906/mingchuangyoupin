@@ -8,7 +8,7 @@
           </a>
         </div>
         <div class="info">
-          <p class="name">123</p>
+          <p class="name">{{username}}</p>
           <p class="grade">
             <i>
               <img
@@ -88,6 +88,7 @@
 
       <van-popup class="check" v-model="show">
         <p>您确定要退出登录？</p>
+        <!-- 这里点退出还要把登录状态给改成false -->
         <router-link to="/login" style=" color: #d9232e;">确定</router-link>
         <a href="#" @click="showup">取消</a>
         </van-popup>
@@ -109,12 +110,15 @@ Vue.use(Button);
 export default {
   
    data() {
+     console.log(this.$route.query.username)
     return {
+      username:this.$route.query.username*1,
       show: false
     }
   },
 
   methods: {
+    
     showPopup() {
       this.show = true;
     },
