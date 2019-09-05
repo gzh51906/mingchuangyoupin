@@ -76,14 +76,14 @@ export default {
     this.$axios.get("http://localhost:5786/special").then(res => {
         
       this.spclist = res.data.data.spe;
-      console.log(this.spclist);
+      // console.log(this.spclist);
         
     });
     
   }
 };
 </script>
-<style >
+<style scoped>
 .app{
     height: 120rem;
     
