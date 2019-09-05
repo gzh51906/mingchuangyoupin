@@ -9,7 +9,9 @@
           <h3>{{this.name}}</h3>
         </el-col>
         <el-col :span="6">
-          <i class="icon2 el-icon-shopping-cart-1" @click="gocart"></i>
+          <i class="icon2 el-icon-shopping-cart-1" @click="gocart">
+            <em v-if="numlittle">{{numlittle}}</em>
+          </i>
           <i class="icon2 el-icon-search" @click="gosearch"></i>
         </el-col>
       </el-row>
@@ -52,7 +54,8 @@ export default {
       active: "",
       type: "",
       name: "",
-      tab: {}
+      tab: {},
+      numlittle: ""
     };
   },
   created() {
@@ -62,6 +65,16 @@ export default {
     // this.getRouterData();
     this.getlistdata();
     this.getlistdatabot(this.name);
+  },
+  updated() {
+    let timer = setTimeout(() => {
+      this.numlittle = this.$store.getters.totalqty;
+    }, 1000);
+  },
+  mounted() {
+    let timer = setTimeout(() => {
+      this.numlittle = this.$store.getters.totalqty;
+    }, 1000);
   },
   methods: {
     gocart() {
@@ -159,6 +172,18 @@ header {
     .icon2 {
       float: right;
       margin-right: 10px;
+      em {
+        width: 16px;
+        height: 16px;
+        border-radius: 8px;
+        background-color: #f00;
+        line-height: 16px;
+        font-size: 12px;
+        color: #effeee;
+        position: absolute;
+        right: 1px;
+        top: 4px;
+      }
     }
   }
 }

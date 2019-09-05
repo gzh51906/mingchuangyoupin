@@ -18,7 +18,7 @@
         />
       </van-col>
     </van-row>
-    <a href="#" class="ms" v-for="(item,idx)in spclist" :key="idx">
+    <a href="#" class="ms" v-for="(item,idx) in spclist" :key="idx">
       <div class="author">
         <div class="pic">
           <van-image class="sign" round width="1rem" height="1rem" v-bind:src="item.pic" />
@@ -62,20 +62,14 @@ export default {
   created() {
     this.$axios.get("http://localhost:5786/special").then(res => {
       this.spclist = res.data.data.spe;
-<<<<<<< HEAD
       // console.log(this.spclist);
-        
-=======
-      console.log(this.spclist);
->>>>>>> 3fc5cb1e826556b3baf8338f0bf1cfb54b592872
     });
   }
 };
 </script>
 <style scoped>
-.app{
-    height: 120rem;
-    
+.app {
+  height: 120rem;
 }
 .ms {
   display: block;

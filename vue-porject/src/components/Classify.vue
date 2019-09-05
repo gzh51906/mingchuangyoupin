@@ -20,7 +20,7 @@
           </el-tabs>
         </el-col>
         <el-col class="rightbox" :span="20">
-          <img :src="listdata.src" class="banner" alt />
+          <img :src="listdata.src" @click="gotodetails(listdata.bdid)" class="banner" alt />
           <p class="namebox">
             <el-divider class="titlediv">{{listdata.name}}分类</el-divider>
           </p>
@@ -79,56 +79,56 @@ export default {
           id: 0,
           bimg:
             "http://s1.hgcang.com/bsimg/ec/public/images/2f/49/2f493ed5d17fe3af698e224626761ff8.jpg?x-oss-process=style/high",
-          bd: "963"
+          bd: "61"
         },
         {
           name: "餐厨",
           id: 1,
           bimg:
             "http://s2.hgcang.com/bsimg/ec/public/images/e0/f9/e0f9812f526e39a7b4f0cf15c4b3200e.jpg?x-oss-process=style/high",
-          bd: "60"
+          bd: "77"
         },
         {
           name: "服装",
           id: 2,
           bimg:
             "http://s1.hgcang.com/bsimg/ec/public/images/bb/2f/bb2f115a1ba7fd1dde824d071bfccb7b.jpg?x-oss-process=style/high",
-          bd: "79"
+          bd: "107"
         },
         {
           name: "美护",
           id: 3,
           bimg:
-            "http://s2.hgcang.com/bsimg/ec/public/images/d0/2c/d02c735f67cdb2515558379694418cb0.jpg?x-oss-process=style/high",
-          bd: "1017"
+            "http://s1.hgcang.com/bsimg/ec/public/images/d0/2c/d02c735f67cdb2515558379694418cb0.jpg?x-oss-process=style/high",
+          bd: "330"
         },
         {
           name: "出行",
           id: 4,
           bimg:
             "http://s2.hgcang.com/bsimg/ec/public/images/c1/62/c162ab4846c60c2d16dee41f0755516d.jpg?x-oss-process=style/high",
-          bd: "2362"
+          bd: "373"
         },
         {
           name: "电器",
           id: 5,
           bimg:
             "http://s1.hgcang.com/bsimg/ec/public/images/c4/ce/c4cef547f4eff3535a9b462fb3f0cd75.jpg?x-oss-process=style/high",
-          bd: "926"
+          bd: "397"
         },
         {
           name: "杂货",
           id: 6,
           bimg:
             "http://s2.hgcang.com/bsimg/ec/public/images/a8/6e/a86edab993a7c1ba180234f5173bf174.jpg?x-oss-process=style/high",
-          bd: "609"
+          bd: "443"
         },
         {
           name: "系列",
           id: 7,
           bimg:
             "http://s2.hgcang.com/bsimg/ec/public/images/ed/de/edde081888c15b8232f1b809bf55515d.jpg?x-oss-process=style/high",
-          bd: "3184"
+          bd: "545"
         }
       ],
       listdata: {}
@@ -156,6 +156,7 @@ export default {
     },
     updatedata(idx) {
       this.listdata.src = this.tablist[this.active.index].bimg;
+      this.listdata.bdid = this.tablist[this.active.index].bd;
       this.listdata.name = this.tablist[this.active.index].name;
       this.getlistdata(idx);
 

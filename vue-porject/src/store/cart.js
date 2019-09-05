@@ -1,4 +1,4 @@
-// import axios from 'axios';
+import axios from 'axios';
 
 export default {
     state: {
@@ -8,29 +8,69 @@ export default {
         totalprice: function (state) {
             let result = 0
             state.cartlist.forEach(element => {
-                result += element.qty * element.price * Number(element.ischeck)
+                result += (element.qty * element.price) * Number(Boolean(element.ischeck));
             });
             return result;
         },
         totalqty(state) {
             let result = 0
             state.cartlist.forEach(element => {
-                result += element.qty * Number(element.ischeck)
+                result += Number(Boolean(element.ischeck))
+                // * Number(element.ischeck)
             });
             return result;
         }
     },
     mutations: {
         additem(state, goods) {
-            state.cartlist.push(goods);
+            window.console.log(goods, state, 111111111111111111);
+            // for (let i = 0; i < state.cartlist.length; i++) {
+            //     if (state.cartlist[i].id == goods.id) {
+            //         goods.qty = goods.qty + state.cartlist[i].qty;
+            //         axios.delete('http://localhost:5786/usercart', {
+            //             data: {
+            //                 username: goods.username,
+            //                 id: goods.id
+            //             }
+            //         }).then((data) => {
+            //             state.cartlist.splice(i, 1);
+            //             window.console.log(data, 2222);
+            //         })
+            //     }
+
+            // }
+            axios.delete('http://localhost:5786/usercart', {
+                data: {
+                    username: goods.username,
+                    id: goods.id
+                }
+            }).then((data) => {
+                window.console.log(data);
+                axios.post("http://localhost:5786/usercart", goods).then((data) => {
+                    window.console.log(data);
+                    state.cartlist.push(goods);
+
+                })
+            })
+
+
         },
-        removeitem(state, id) {
-            window.console.log(id);
+        removeitem(state, { username, id }) {
+            // window.console.log(id, username, state.cartlist);
             for (let i = 0; i < id.length; i++) {
                 for (let j = 0; j < state.cartlist.length; j++) {
                     if (state.cartlist[j].id == id[i]) {
                         window.console.log(j);
-                        state.cartlist.splice(j, 1);
+                        axios.delete('http://localhost:5786/usercart', {
+                            data: {
+                                username: username,
+                                id: state.cartlist[j].id
+                            }
+                        }).then((data) => {
+                            state.cartlist.splice(j, 1);
+                            window.console.log(data);
+
+                        })
                     }
                 }
             }
@@ -45,32 +85,31 @@ export default {
         },
         clearcart(state) {
             state.cartlist = []
+        },
+        getuserdata(state, { username }) {
+            axios.get('http://localhost:5786/usercart/', {
+                params: {
+                    username: username
+                }
+            }).then((data) => {
+                state.cartlist = data.data.data
+                // window.console.log(state.cartlist);
+            })
         }
     },
     actions: {
-        // getusercart(context, { username }) {
-        //     axios.get('http://localhost:5786/usercart/', {
-        //         params: {
-        //             username: username
-        //         }
-        //     }).then((data) => {
-        //         window.console.log(data);
-        //     })
-        // }
-        // changeQtyAsync(context, { id, qty }) {
-        //     // context：类似与store
-        //     window.console.log('changeQtyAsync:', qty, id)
-        //     // 需要向服务器获取库存信息，再修改数量
-        //     axios.get('http://localhost:5786/goods/kucun').then(({ data }) => {
-        //         let kucun = data.data;
-        //         // 库存不足
-        //         if (qty > kucun) {
-        //             qty = kucun;
-        //         }
-        //         context.commit('changeQty', { id, qty })
-        //     })
+        getusercart(context, { username }) {
+            window.console.log(username);
 
-        //     return qty;
-        // }
+            axios.get('http://localhost:5786/usercart/', {
+                params: {
+                    username: username
+                }
+            }).then((data) => {
+                // window.console.log(data.data.data);
+                this.state.cartlist = data.data.data
+                window.console.log(this.state.cartlist);
+            })
+        }
     }
 }

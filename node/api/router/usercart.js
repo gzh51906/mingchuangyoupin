@@ -5,6 +5,7 @@ const { formatData } = require('../utils/index');
 //增
 Router.post('/', async (req, res) => {
     let { id, title, imgurl, price, ischeck, username, qty } = req.body;
+    console.log(id, req.body);
 
     try {
         let data = {}
@@ -31,12 +32,15 @@ Router.patch('/', async (req, res) => {
 });
 //删
 Router.delete('/', async (req, res) => {
-    // let { id, username } = req.body;
-    let { username } = req.body;
+    let { id, username } = req.body;
+    // let { username } = req.body;
+    console.log(id, username);
+
     try {
         let data = {}
-        // data.spe = await mysql(`DELETE FROM vueporject.usercart WHERE  usercart.username =  '${username}' AND  usercart.id =${id}`)
-        data.spe = await mysql(`DELETE FROM vueporject.usercart WHERE  usercart.username = '${username}'`)
+        //"DELETE FROM vueporject.usercart WHERE  usercart.username =  'undefined' AND  usercart.id =undefined"
+        data.spe = await mysql(`DELETE FROM vueporject.usercart WHERE  usercart.username =  '${username}' AND  usercart.id =${id}`)
+        // data.spe = await mysql(`DELETE FROM vueporject.usercart WHERE  usercart.username = '${username}'`)
         result = formatData({ data });
 
     } catch (err) {
