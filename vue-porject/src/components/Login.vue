@@ -17,10 +17,11 @@
       </van-col>
     </van-row>
     <van-cell-group>
-      <van-field v-model="username" placeholder="手机号" />
-      <van-field v-model="password" type="password" placeholder="密码" />
+      <van-field  placeholder="手机号" />
+      <van-field  type="password" placeholder="密码" />
     </van-cell-group>
     <div class="gogo">
+<<<<<<< HEAD
       <van-row type="flex" justify="center" align="center">
         <van-col span="21.5">
           <button class="login">登录</button>
@@ -33,20 +34,41 @@
       </van-row>
       <div class="link">
         <a href="#" :to:"/Reg">注册账号</a>
+=======
+    <van-row type="flex" justify="center" align="center">
+      <van-col span="21.5">
+        <button class="login">登录</button>
+      </van-col>
+    </van-row>
+    <van-row type="flex" justify="center" align="center">
+      <van-col span="21.5">
+        <button class="reg">手机号快速登录</button>
+      </van-col>
+    </van-row>
+    <div class="link">
+        <router-link to="/reg">注册账号</router-link>
+>>>>>>> 7d04eca4500840bc087c3362882c7265ca893225
         <a href="#">忘记密码</a>
       </div>
     </div>
   </div>
 </template>
 
-<script>
+<script >
 import Vue from "vue";
 import { NavBar } from "vant";
 import { Field } from "vant";
+import { Cell, CellGroup } from 'vant';
+import { Dialog } from 'vant';
 
+// 全局注册
+Vue.use(Dialog);
+Vue.use(Cell).use(CellGroup);
 Vue.use(Field);
 Vue.use(NavBar);
-export default {};
+export default {
+  
+};
 </script>
 <style scoped>
 .Login {

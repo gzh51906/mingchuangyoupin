@@ -62,7 +62,12 @@ export default {
   created() {
     this.$axios.get("http://localhost:5786/special").then(res => {
       this.spclist = res.data.data.spe;
+<<<<<<< HEAD
+      // console.log(this.spclist);
+        
+=======
       console.log(this.spclist);
+>>>>>>> 3fc5cb1e826556b3baf8338f0bf1cfb54b592872
     });
   }
 };

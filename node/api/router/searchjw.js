@@ -5,7 +5,7 @@ const { formatData } = require('../utils/index');
 Router.route('/').get(async (req, res) => {
 
     let { text } = req.query;
-    console.log(text);
+    // console.log(text);
     let result;
     try {
         let data = {}
