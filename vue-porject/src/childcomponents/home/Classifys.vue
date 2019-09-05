@@ -1,17 +1,17 @@
 <template>
   <div class="homeclassify">
-    <img :src="idximgurl" alt="" class="bigimg" />
+    <img :src="idximgurl" alt class="bigimg" />
     <div class="listbox">
       <div class="listbox-p">{{ idxitem }}</div>
       <div class="list-box">
         <a
-          href=""
+          href
           v-for="item in goods"
           :key="item.id"
           class="ms-product-item"
           @click.prevent="goto(item.id)"
         >
-          <div class="pic ">
+          <div class="pic">
             <div>
               <img :src="item.imgurl" />
             </div>
@@ -19,7 +19,7 @@
           <div class="info">
             <p class="brief">{{ item.brief }}</p>
             <p class="name">{{ item.title }}</p>
-            <p class="price ">
+            <p class="price">
               <span>{{ item.price }}</span>
             </p>
           </div>

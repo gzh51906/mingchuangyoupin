@@ -41,18 +41,20 @@
         <p>总额：￥{{totalprice.toFixed(2)}} 立减￥0</p>
       </div>
       <div class="fdiv3" v-if="isxiadan">下单</div>
-      <div class="fdiv3" v-if="!isxiadan" @click="removeinbianji">删除</div>
+      <div class="fdiv4" v-if="!isxiadan" @click="removeinbianji">删除</div>
     </footer>
   </div>
 </template>
 
 <script>
 import Vue from "vue";
-import { Card, Checkbox, CheckboxGroup, Stepper } from "vant";
+import { Card, Checkbox, CheckboxGroup, Stepper, Dialog } from "vant";
+
 Vue.use(Card)
   .use(Checkbox)
   .use(CheckboxGroup)
-  .use(Stepper);
+  .use(Stepper)
+  .use(Dialog);
 import { mapState, mapGetters, mapMutations, mapActions } from "vuex";
 import { log } from "util";
 
@@ -81,7 +83,8 @@ export default {
       arrT.forEach(e => {
         attr.push(e.id);
       });
-      this.remove(attr);
+      this.remove({ id: attr, username: "testuser" });
+      this.$forceUpdate();
     },
     changexiadan() {
       this.isxiadan = !this.isxiadan;
@@ -90,6 +93,11 @@ export default {
       } else {
         this.isxiadantext = "完成";
       }
+      Dialog.alert({
+        message: "您将离开当前页面"
+      }).then(() => {
+        // on close
+      });
     },
     add125(id) {
       this.checked = this.cartlist.every(item => {
@@ -102,13 +110,15 @@ export default {
       });
     },
     ...mapMutations({
+      getcart: "getuserdata",
       changeQty: "changeqty",
       remove: "removeitem",
       clear: function(commit, payload) {
         commit("clearcart");
       }
     }),
-    ...mapActions(["changeQtyAsync"]),
+    ...mapActions(["getusercart"]),
+
     async getlistdata() {
       let { data } = await this.$axios.get("http://localhost:5786/classify/", {
         params: {
@@ -123,21 +133,7 @@ export default {
     }
   },
   created() {
-    let username='testuser';
-    if (username) {
-       this.$axios.get("http://localhost:5786/usercart/", {
-        params: {
-          username: username
-        }
-      })
-      .then(data => {
-        window.console.log(data);
-      });
-    }else{
-      console.log("请登录后查看购物车");
-      
-    }
-   
+    this.getcart({ username: "testuser" });
     this.getlistdata();
   }
 };
@@ -271,6 +267,13 @@ export default {
       }
     }
     .fdiv3 {
+      width: 2.333333rem;
+      background: #58bc58;
+      height: 100%;
+      text-align: center;
+      line-height: 1.333333rem;
+    }
+    .fdiv4 {
       width: 2.333333rem;
       background: #ff0000;
       height: 100%;

@@ -6,12 +6,17 @@
           <i class="icon1 el-icon-house" @click="gohome"></i>
         </el-col>
         <el-col :span="12">
-          <a href="#backtop">
-            <h3>{{data.title}}</h3>
-          </a>
+          <!-- <a href="#backtop"> -->
+          <h3>{{data.title}}</h3>
+          <!-- </a> -->
         </el-col>
         <el-col :span="6">
-          <i class="icon2 el-icon-shopping-cart-1" @click="gocart"></i>
+          <!-- <el-badge class="item icon2" :value="numlittle"> -->
+          <i class="icon2 el-icon-shopping-cart-1" info="8" @click="gocart">
+            <em v-if="numlittle">{{numlittle}}</em>
+          </i>
+          <!-- </el-badge> -->
+
           <i class="icon2 el-icon-search" @click="gosearch"></i>
         </el-col>
       </el-row>
@@ -142,31 +147,58 @@
 
 <script>
 import Vue from "vue";
-import { Swipe, SwipeItem, Stepper, Grid, GridItem } from "vant";
+import { Swipe, SwipeItem, Stepper, Grid, GridItem, Dialog } from "vant";
 // import { lookup } from "dns";
-
 Vue.use(Swipe)
   .use(SwipeItem)
   .use(Stepper)
   .use(Grid)
-  .use(GridItem);
+  .use(GridItem)
+  .use(Dialog);
 export default {
   data() {
     return {
+      username: "",
       value: 1,
       data: {},
-      goodlist: []
+      goodlist: [],
+      numlittle: ""
     };
   },
   created() {
     let { id } = this.$route.params;
     this.getData(id);
+    this.$store.commit("getuserdata", {
+      username: "testuser"
+    });
+    this.username = "testuser";
   },
 
   methods: {
     gocartandadd() {
       this.gocart();
-      this.add2cart();
+      let { id, imgurl, price, title } = this.data;
+      let { cartlist } = this.$store.state.cart;
+
+      let hasItem = cartlist.filter(function(item) {
+        return item.id === id;
+      })[0];
+      if (hasItem) {
+        this.$store.commit("changeqty", {
+          id: id,
+          qty: hasItem.qty + this.value
+        });
+      } else {
+        this.$store.commit("additem", {
+          username: this.username,
+          id,
+          imgurl,
+          price: Number(price.substr(1)),
+          title,
+          qty: this.value,
+          ischeck: true
+        });
+      }
     },
     gocart() {
       this.$router.push({ name: "cart" });
@@ -177,10 +209,12 @@ export default {
     gosearch() {
       this.$router.push({ name: "searchjw" });
     },
+
     updatedetails(id) {
       this.value = 1;
       this.getData(id);
       // this.backTop();
+      // this.$forceUpdate()
     },
     onChange(value) {
       Toast.loading({ forbidClick: true });
@@ -227,8 +261,18 @@ export default {
           id: id,
           qty: hasItem.qty + this.value
         });
+        this.$store.commit("additem", {
+          username: this.username,
+          id,
+          imgurl,
+          price: Number(price.substr(1)),
+          title,
+          qty: hasItem.qty + this.value,
+          ischeck: true
+        });
       } else {
         this.$store.commit("additem", {
+          username: this.username,
           id,
           imgurl,
           price: Number(price.substr(1)),
@@ -237,6 +281,13 @@ export default {
           ischeck: true
         });
       }
+      Dialog.alert({
+        message: "该商品已经加入购物车！"
+      }).then(() => {
+        // on close
+      this.numlittle = this.$store.getters.totalqty;
+
+      });
       // console.log(this.$store.state.cart.cartlist);
       // console.log(this.$store.getters.totalprice);
     },
@@ -244,12 +295,23 @@ export default {
       window.scrollTo(0, 0);
     }
   },
-  // mounted() {
-  //   window.addEventListener("scroll", this.scrollToTop);
-  // },
-  // destroyed() {
-  //   window.removeEventListener("scroll", this.scrollToTop);
-  // }
+  updated() {
+    let timer = setTimeout(() => {
+      this.numlittle = this.$store.getters.totalqty;
+      //   console.log(this.$store.getters.totalqty);
+    }, 1000);
+  },
+  mounted() {
+    // console.log(this.$store.getters.totalqty);
+    // window.addEventListener("scroll", this.scrollToTop);
+    let timer = setTimeout(() => {
+      this.numlittle = this.$store.getters.totalqty;
+      //   console.log(this.$store.getters.totalqty);
+    }, 1000);
+  },
+  destroyed() {
+    // window.removeEventListener("scroll", this.scrollToTop);
+  }
 };
 </script>
 <style lang="scss" scoped>
@@ -296,7 +358,22 @@ header {
     }
     .icon2 {
       float: right;
+      // padding-top: 10px;
       margin-right: 10px;
+      position: relative;
+
+      em {
+        width: 16px;
+        height: 16px;
+        border-radius: 8px;
+        background-color: #f00;
+        line-height: 16px;
+        font-size: 12px;
+        color: #effeee;
+        position: absolute;
+        right: -6px;
+        top: 4px;
+      }
     }
   }
 }
