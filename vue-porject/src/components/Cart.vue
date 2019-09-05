@@ -2,19 +2,15 @@
   <div class="cartbox">
     <header>
       <h3>购物车</h3>
+      <div @click="changexiadan">{{isxiadantext}}</div>
     </header>
     <main>
-      <div class="listbox" v-for="(item,idx) in list" :key="idx">
+      <div class="listbox" v-for="(item,idx) in cartlist" :key="idx" :id="item.id">
         <div class="listdiv1">
-          <van-checkbox v-model="item.ischeck" checked-color="#FF0000"></van-checkbox>
+          <van-checkbox v-model="item.ischeck" checked-color="#FF0000" @change="add125(item.id)"></van-checkbox>
         </div>
         <div class="listdiv2">
-          <van-card
-            :num="item.qty"
-            price="2.00"
-            title="商品标题"
-            thumb="https://img.yzcdn.cn/vant/t-thirt.jpg"
-          >
+          <van-card :num="item.qty" :price="item.price" :title="item.title" :thumb="item.imgurl">
             <div class="input" slot="footer">
               <van-stepper v-model="item.qty" min="1" max="8" />
             </div>
@@ -36,15 +32,16 @@
     </main>
     <footer>
       <div class="fdiv1">
-        <van-checkbox v-model="checked" checked-color="#FF0000">已选</van-checkbox>
+        <van-checkbox v-model="checked" @click="add521" checked-color="#FF0000">已选({{totalqty}})</van-checkbox>
       </div>
       <div class="fdiv2">
         <p>
-          <span>￥50</span>
+          <span>￥{{totalprice.toFixed(2)}}</span>
         </p>
-        <p>总额：￥50.00 立减￥0</p>
+        <p>总额：￥{{totalprice.toFixed(2)}} 立减￥0</p>
       </div>
-      <div class="fdiv3">下单</div>
+      <div class="fdiv3" v-if="isxiadan">下单</div>
+      <div class="fdiv3" v-if="!isxiadan" @click="removeinbianji">删除</div>
     </footer>
   </div>
 </template>
@@ -57,12 +54,15 @@ Vue.use(Card)
   .use(CheckboxGroup)
   .use(Stepper);
 import { mapState, mapGetters, mapMutations, mapActions } from "vuex";
+import { log } from "util";
 
 export default {
   data() {
     return {
+      isxiadan: true,
+      isxiadantext: "编辑",
       checked: true,
-      list: [{ ischeck: true, qty: 2 }, { ischeck: true, qty: 6 }],
+      // list: [{ ischeck: true, qty: 2 }, { ischeck: true, qty: 6 }],
       goodlist: []
     };
   },
@@ -72,11 +72,34 @@ export default {
         return state.cart.cartlist;
       }
     }),
-    ...mapGetters(["totalprice"])
+    ...mapGetters(["totalprice", "totalqty"])
   },
   methods: {
-    toggle(index) {
-      this.$refs.checkboxes[index].toggle();
+    removeinbianji() {
+      let arrT = this.cartlist.filter(item => item.ischeck);
+      let attr = [];
+      arrT.forEach(e => {
+        attr.push(e.id);
+      });
+      this.remove(attr);
+    },
+    changexiadan() {
+      this.isxiadan = !this.isxiadan;
+      if (this.isxiadan) {
+        this.isxiadantext = "编辑";
+      } else {
+        this.isxiadantext = "完成";
+      }
+    },
+    add125(id) {
+      this.checked = this.cartlist.every(item => {
+        item.ischeck;
+      });
+    },
+    add521() {
+      this.cartlist.forEach(element => {
+        element.ischeck = !this.checked;
+      });
     },
     ...mapMutations({
       changeQty: "changeqty",
@@ -86,10 +109,6 @@ export default {
       }
     }),
     ...mapActions(["changeQtyAsync"]),
-
-    goto(id) {
-      this.$router.push(`/goods/${id}`);
-    },
     async getlistdata() {
       let { data } = await this.$axios.get("http://localhost:5786/classify/", {
         params: {
@@ -97,15 +116,28 @@ export default {
           charset: "utf8"
         }
       });
-      // this.listdata.listtop = data.data.fenlei;
       this.goodlist = data.data.tuijian;
-      // console.log(this.goodlist);
-
-      // this.$forceUpdate();
-      console.log(this.goodlist);
+    },
+    gotodetails(id) {
+      this.$router.push({ name: "details", params: { id } });
     }
   },
   created() {
+    let username='testuser';
+    if (username) {
+       this.$axios.get("http://localhost:5786/usercart/", {
+        params: {
+          username: username
+        }
+      })
+      .then(data => {
+        window.console.log(data);
+      });
+    }else{
+      console.log("请登录后查看购物车");
+      
+    }
+   
     this.getlistdata();
   }
 };
@@ -132,6 +164,12 @@ export default {
       height: 100%;
       font-size: 0.42rem;
     }
+    div {
+      position: absolute;
+      top: 0.573333rem;
+      right: 0.266667rem;
+      transform: translate(0, -50%);
+    }
   }
   main {
     background-color: #efefff;
@@ -142,26 +180,31 @@ export default {
     padding-top: 0.266667rem;
 
     .listbox {
+      position: relative;
       display: flex;
-      height: 2.826667rem;
+      // height: 2.826667rem;
       justify-content: flex-start;
       background-color: #fafafa;
-      margin-bottom: 1px;
+      margin-bottom: 2px;
       .listdiv1 {
         width: 10%;
-        height: 100%;
+        // height: 100%;
+        position: absolute;
+        top: 0;
+        bottom: 0px;
+        left: 0;
         display: flex;
         flex-direction: column;
         justify-content: center;
         align-items: center;
       }
       .listdiv2 {
+        margin-left: 10%;
         width: 90%;
         .input {
-          width: 2.666667rem;
-          height: 0.4rem;
-          margin-top: -0.833333rem;
-          float: right;
+          position: absolute;
+          right: 0.133333rem;
+          bottom: 0.133333rem;
         }
       }
     }
@@ -206,21 +249,18 @@ export default {
     color: #ffffff;
     display: flex;
     align-items: center;
-    div {
-      //   display: flex;
-      // flex-direction: column;
-      // justify-content: center;
-    }
+
     .fdiv1 {
       padding: 0.26666rem;
       box-sizing: border-box;
-      width: 2rem;
+      width: 3rem;
       white-space: nowrap;
+      color: #bbb;
     }
     .fdiv2 {
       flex: 1;
       p {
-        padding-right: 0.266667rem;
+        padding-right: 0.1rem;
         box-sizing: border-box;
         width: 100%;
         text-align: right;

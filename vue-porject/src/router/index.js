@@ -58,6 +58,15 @@ let router = new VueRouter({
         name: 'homeclass',
         path: '/homeclass/:id',
         component: HomeClass
+    }, {
+        name: 'reg',
+        path: '/reg',
+        component: Reg
+    },
+    {
+        name: 'searchjw',
+        path: '/searchjw',
+        component: Searchjw
     },
     {
         name: 'searchjw',

@@ -6,7 +6,9 @@
           <i class="icon1 el-icon-house" @click="gohome"></i>
         </el-col>
         <el-col :span="12">
-          <h3>{{data.title}}</h3>
+          <a href="#backtop">
+            <h3>{{data.title}}</h3>
+          </a>
         </el-col>
         <el-col :span="6">
           <i class="icon2 el-icon-shopping-cart-1" @click="gocart"></i>
@@ -15,7 +17,7 @@
       </el-row>
     </header>
     <main>
-      <van-swipe :autoplay="3000" indicator-color="#ff0000">
+      <van-swipe id="backtop" :autoplay="3000" indicator-color="#ff0000">
         <van-swipe-item>
           <img :src="data.imgurl" alt />
         </van-swipe-item>
@@ -160,6 +162,7 @@ export default {
     let { id } = this.$route.params;
     this.getData(id);
   },
+
   methods: {
     gocartandadd() {
       this.gocart();
@@ -177,6 +180,7 @@ export default {
     updatedetails(id) {
       this.value = 1;
       this.getData(id);
+      // this.backTop();
     },
     onChange(value) {
       Toast.loading({ forbidClick: true });
@@ -234,8 +238,18 @@ export default {
         });
       }
       // console.log(this.$store.state.cart.cartlist);
+      // console.log(this.$store.getters.totalprice);
+    },
+    backTop() {
+      window.scrollTo(0, 0);
     }
-  }
+  },
+  // mounted() {
+  //   window.addEventListener("scroll", this.scrollToTop);
+  // },
+  // destroyed() {
+  //   window.removeEventListener("scroll", this.scrollToTop);
+  // }
 };
 </script>
 <style lang="scss" scoped>
@@ -501,7 +515,7 @@ footer {
   border-top: 1px solid #dcdfe6;
   position: absolute;
   bottom: 0px;
-  height: 1.44rem;
+  // height: 1.44rem;
   z-index: 2;
   background: #fff;
   .el-row {

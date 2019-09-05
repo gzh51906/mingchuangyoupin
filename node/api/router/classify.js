@@ -10,7 +10,6 @@ const { formatData } = require('../utils/index');
 //         })
 // });
 Router.route('/').get(async (req, res) => {
-
     let { type } = req.query;
     console.log(type);
     let result;

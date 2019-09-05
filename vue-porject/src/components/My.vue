@@ -91,6 +91,7 @@
         <router-link to="/login" style=" color: #d9232e;">确定</router-link>
         <a href="#" @click="showup">取消</a>
         </van-popup>
+
     </div>
   </div>
 </template>
@@ -129,11 +130,17 @@ export default {
 };
 </script>
 <style scoped>
+
 .my {
   width: 10rem;
   height: 4rem;
   background: #000;
   overflow: hidden;
+}
+.Login {
+  background: #f4f4f4;
+  height: 17.5rem;
+
 }
 .myuser {
   /* overflow: hidden; */
@@ -198,6 +205,7 @@ export default {
   line-height: 1rem;
   margin-left: 0.5rem;
 }
+
 .out {
   margin-top: 0.5rem;
   background: #d9232e;
@@ -233,4 +241,22 @@ export default {
   /* background: #d9232e; */
   color: #b9b9b9;
 }
+
+.gogo {
+  padding-top: 1rem;
+  /* padding-bottom:5rem ; */
+}
+.link {
+  margin: 0.3rem auto;
+  /* background: #fff; */
+  width: 9rem;
+
+  display: flex;
+  justify-content: space-between;
+}
+.link a {
+  font-size: 0.4rem;
+  color: #7f7f7f;
+}
+
 </style>
