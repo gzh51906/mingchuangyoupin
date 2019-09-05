@@ -18,7 +18,9 @@
         />
       </van-col>
     </van-row>
+
     <a href="#" class="ms" v-for="(item,idx) in spclist" :key="idx">
+
       <div class="author">
         <div class="pic">
           <van-image
@@ -28,7 +30,9 @@
             height="1rem"
             v-bind:src="item.pic"
           />
-          <p>{{ item.picp }}</p>
+
+          <p>{{item.picp}}</p>
+
         </div>
       </div>
       <van-image
@@ -41,24 +45,28 @@
         <van-row type="flex" justify="space-between" class="tit">
           <van-col span="18">
             <div class="line">
-              <h4>{{ item.line }}</h4>
+
+                <h4>{{item.line}}</h4>
+
             </div>
           </van-col>
           <van-col span="5">
             <p class="price">
-              &yen;
-              <span>{{ item.price }}</span
-              >起
+                &yen;
+                <span>{{item.price}}</span>起
+
             </p>
           </van-col>
         </van-row>
         <div class="desc">{{ item.desc }}</div>
       </div>
     </a>
+    
   </div>
 </template>
 
 <script>
+
 import Vue from "vue";
 import { Image } from "vant";
 import { Row, Col } from "vant";
@@ -66,18 +74,22 @@ Vue.use(Image);
 Vue.use(Row).use(Col);
 
 export default {
-  data() {
-    return {
-      spclist: []
-    };
-  },
-  created() {
+    data(){
+        return{
+            spclist:[]
+        }
+    },
+    created() {
     this.$axios.get("http://localhost:5786/special").then(res => {
+
       this.spclist = res.data.data.spe;
+
     });
+    
   }
 };
 </script>
+
 <style scoped>
 .app {
   height: 120rem;
@@ -107,21 +119,22 @@ export default {
   margin-top: 0.25rem;
   /* margin-left: 0.25rem; */
 }
-.tit {
-  color: #000;
+.tit{
+    color: #000;
 }
-h4 {
-  font-size: 0.5rem;
+h4{
+    font-size: 0.5rem;
 }
-.price {
-  font-size: 0.45rem;
-  line-height: 0.8rem;
-  color: #d9232e;
+.price{
+    font-size: 0.45rem;
+    line-height: 0.8rem;
+    color: #d9232e;
 }
-.desc {
-  font-size: 0.4rem;
-  color: #7f7f7f;
+.desc{
+    font-size: 0.4rem;
+    color: #7f7f7f;
 }
+
 </style>>
 
 

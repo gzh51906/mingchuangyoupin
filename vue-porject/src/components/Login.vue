@@ -17,13 +17,17 @@
       </van-col>
     </van-row>
     <van-cell-group>
-      <van-field placeholder="手机号" />
-      <van-field type="password" placeholder="密码" />
+
+      <van-field v-model="phone" placeholder="手机号" />
+      <van-field v-model="password" type="password" placeholder="密码" />
+
     </van-cell-group>
     <div class="gogo">
       <van-row type="flex" justify="center" align="center">
         <van-col span="21.5">
-          <button class="login">登录</button>
+
+          <button class="login" @click="dl">登录</button>
+
         </van-col>
       </van-row>
       <van-row type="flex" justify="center" align="center">
@@ -46,12 +50,69 @@ import { Field } from "vant";
 import { Cell, CellGroup } from "vant";
 import { Dialog } from "vant";
 
+
+
+import "../static/jquery-3.4.1"
+import "../static/md5"
+
 // 全局注册
 Vue.use(Dialog);
 Vue.use(Cell).use(CellGroup);
 Vue.use(Field);
 Vue.use(NavBar);
-export default {};
+
+
+export default {
+  data() {
+    return {
+      phone: "",
+      password: ""
+    };
+  },
+  methods: {
+    dl() {
+      if (this.phone.length == 0) {
+        this.$dialog.alert({
+          title: "提示",
+          message: "账号不能为空"
+        });
+      } else {
+        let password = $.md5(this.password)
+        this.$axios
+          .post("http://localhost:5786/login", {
+            username: this.phone,
+            password: password
+          })
+          .then(res => {
+            console.log(res.data);
+            if (res.data == "用户名不存在") {
+              this.$dialog.alert({
+                title: "提示",
+                message: "账号不存在"
+              });
+            } else if (res.data == "密码错误") {
+              this.$dialog.alert({
+                title: "提示",
+                message: "密码错误"
+              });
+            }else if(res.data == "登陆成功"){
+                localStorage.setItem("username",this.phonep)
+                this.$dialog.alert({
+                title: "提示",
+                message: "登陆成功"
+              });
+              this.$router.push({
+                path : '/my',
+                query:{
+                  username:[this.phone]
+                }
+              })
+            }
+          });
+      }
+    }
+  }
+};
 </script>
 <style scoped>
 .Login {
