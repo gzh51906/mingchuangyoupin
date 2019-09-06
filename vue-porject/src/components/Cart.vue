@@ -39,11 +39,16 @@
         </el-row>
       </div>
     </main>
-    <!-- <section> -->
-    <van-dialog class="tancuang" v-model="show" title="扫码付款" show-cancel-button>
+    <van-dialog
+      class="tancuang"
+      @confirm="ddconfirm"
+      @cancel="ddcancel"
+      v-model="show"
+      title="扫码付款"
+      show-cancel-button
+    >
       <img src="1567737173.png" />
     </van-dialog>
-    <!-- </section> -->
     <footer>
       <div class="fdiv1">
         <van-checkbox v-model="checked" @click="add521" checked-color="#FF0000">已选({{totalqty}})</van-checkbox>
@@ -102,6 +107,14 @@ export default {
     ...mapGetters(["totalprice", "totalqty"])
   },
   methods: {
+    ddconfirm() {
+      // console.log("点击了确认按钮");
+      // this.removeinbianji(); //在这之前应该先提交数据至订单表,应该去掉购物车里面已经购买的
+      // this.$router.push({ name: "my", params: { username: this.username } });//跳转至订单页面
+    },
+    ddcancel() {
+      // console.log("点击了取消按钮");
+    },
     changeerweima() {
       this.show = !this.show;
     },
@@ -128,7 +141,6 @@ export default {
       });
     },
     add125(id) {
-      // console.log(id, this.cartlist);
       for (let i = 0; i < this.cartlist.length; i++) {
         if (this.cartlist[i].ischeck == false) {
           this.checked = false;
