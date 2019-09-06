@@ -168,10 +168,10 @@ export default {
   created() {
     let { id } = this.$route.params;
     this.getData(id);
+    this.username = localStorage.getItem("username");
     this.$store.commit("getuserdata", {
-      username: "testuser"
+      username: this.username
     });
-    this.username = "testuser";
   },
 
   methods: {
@@ -285,8 +285,7 @@ export default {
         message: "该商品已经加入购物车！"
       }).then(() => {
         // on close
-      this.numlittle = this.$store.getters.totalqty;
-
+        this.numlittle = this.$store.getters.totalqty;
       });
       // console.log(this.$store.state.cart.cartlist);
       // console.log(this.$store.getters.totalprice);
