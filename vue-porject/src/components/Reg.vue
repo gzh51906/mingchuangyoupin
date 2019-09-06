@@ -29,14 +29,13 @@ import { NavBar } from "vant";
 import { Field } from "vant";
 import { Cell, CellGroup } from "vant";
 import axios from "axios";
-import "../static/jquery-3.4.1"
-import "../static/md5"
+import "../static/jquery-3.4.1";
+import "../static/md5";
 Vue.use(Cell).use(CellGroup);
 Vue.use(Image);
 Vue.use(Field);
 Vue.use(NavBar);
 export default {
-
   data() {
     return {
       phone: "",
@@ -52,7 +51,7 @@ export default {
       if (this.check1 && this.check2) {
         console.log(this.phone, this.password);
         console.log($.md5(this.password));
-        let password = $.md5(this.password)
+        let password = $.md5(this.password);
         this.$axios
           .post("http://localhost:5786/reg", {
             username: this.phone,
@@ -60,6 +59,7 @@ export default {
           })
           //注册成功跳转
           .then(res => {
+
             this.$dialog.alert({
               title: "提示",
               message: "注册成功"
