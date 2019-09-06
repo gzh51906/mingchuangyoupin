@@ -1,9 +1,9 @@
 <template>
   <div class="Login">
     <van-nav-bar title="登录">
-      <van-icon name="wap-home" slot="left" size="0.8rem" />
+      <van-icon name="wap-home" @click="home" slot="left" size="0.8rem" />
       <van-icon name="search" slot="right" size="0.8rem" class="search" />
-      <van-icon name="shopping-cart-o" slot="right" size="0.8rem" />
+      <!-- <van-icon name="shopping-cart-o" @click="cart" slot="right" size="0.8rem" /> -->
     </van-nav-bar>
     <van-row type="flex" class="logo" justify="center" align="center">
       <van-col span="6">
@@ -49,19 +49,13 @@ import { NavBar } from "vant";
 import { Field } from "vant";
 import { Cell, CellGroup } from "vant";
 import { Dialog } from "vant";
-
-
-
 import "../static/jquery-3.4.1"
 import "../static/md5"
-
 // 全局注册
 Vue.use(Dialog);
 Vue.use(Cell).use(CellGroup);
 Vue.use(Field);
 Vue.use(NavBar);
-
-
 export default {
   data() {
     return {
@@ -70,6 +64,7 @@ export default {
     };
   },
   methods: {
+    
     dl() {
       if (this.phone.length == 0) {
         this.$dialog.alert({
@@ -96,21 +91,29 @@ export default {
                 message: "密码错误"
               });
             }else if(res.data == "登陆成功"){
-                localStorage.setItem("username",this.phonep)
+                localStorage.setItem("username",this.phone)
                 this.$dialog.alert({
                 title: "提示",
                 message: "登陆成功"
               });
               this.$router.push({
                 path : '/my',
-                query:{
-                  username:[this.phone]
-                }
+                
               })
             }
           });
       }
-    }
+    },
+    home(){
+      this.$router.push({
+              name:"home"
+            })
+    },
+    // cart(){
+    //   this.$router.push({
+    //           name:"cart"
+    //         })
+    // }
   }
 };
 </script>

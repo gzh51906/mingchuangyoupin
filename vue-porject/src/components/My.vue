@@ -4,7 +4,7 @@
       <div class="myuser">
         <div class="pic">
           <a href="#">
-            <img src="http://m.miniso.cn/public/app/b2c/statics/sprites/default-avatar.png" alt />
+            <img src="http://m.miniso.cn/public/app/b2c/statics/sprites/default-avatar.png" @click="ad" alt />
           </a>
         </div>
         <div class="info">
@@ -118,7 +118,12 @@ export default {
   },
 
   methods: {
-    
+    ad(){
+      this.$router.push({
+                path : '/admin',
+                
+              })
+    },
     showPopup() {
       this.show = true;
     },
