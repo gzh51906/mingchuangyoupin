@@ -13,7 +13,7 @@ import Details from '../childcomponents/classify/Details.vue'
 import Classification from '../childcomponents/classify/classification.vue'
 import Searchjw from '../childcomponents/classify/search.vue'
 import Login from '../components/Login.vue'
-import Admin from '../components/Admin.vue'
+
 // 安装（使用）路由
 Vue.use(VueRouter);
 // 实例化router并配置参数
@@ -60,11 +60,7 @@ let router = new VueRouter({
         path: '/special',
         component: Special
     },
-    {
-        name:'admin',
-        path:'/admin',
-        component: Admin
-    },
+    
     {
         name: 'my',
         path: '/my',

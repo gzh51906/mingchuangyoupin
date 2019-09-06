@@ -4,7 +4,7 @@
       <div class="myuser">
         <div class="pic">
           <a href="#">
-            <img src="http://m.miniso.cn/public/app/b2c/statics/sprites/default-avatar.png" @click="ad" alt />
+            <img src="http://m.miniso.cn/public/app/b2c/statics/sprites/default-avatar.png" alt />
           </a>
         </div>
         <div class="info">
@@ -110,7 +110,7 @@ Vue.use(Button);
 export default {
   
    data() {
-     console.log(localStorage.getItem("username"))
+     
     return {
       username:localStorage.getItem("username"),
       show: false
@@ -118,12 +118,7 @@ export default {
   },
 
   methods: {
-    ad(){
-      this.$router.push({
-                path : '/admin',
-                
-              })
-    },
+    
     showPopup() {
       this.show = true;
     },
