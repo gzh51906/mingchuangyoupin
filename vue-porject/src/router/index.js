@@ -13,6 +13,7 @@ import Details from '../childcomponents/classify/Details.vue'
 import Classification from '../childcomponents/classify/classification.vue'
 import Searchjw from '../childcomponents/classify/search.vue'
 import Login from '../components/Login.vue'
+
 // 安装（使用）路由
 Vue.use(VueRouter);
 // 实例化router并配置参数
@@ -59,6 +60,7 @@ let router = new VueRouter({
         path: '/special',
         component: Special
     },
+    
     {
         name: 'my',
         path: '/my',
@@ -107,6 +109,7 @@ let router = new VueRouter({
             next();
         }
     },
+    
     {
         // 当浏览器路径为/时，重定向到/home
         path: '/',

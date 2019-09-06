@@ -52,6 +52,7 @@ export default {
   methods: {
     //注册
     zc() {
+      //如果手机号和密码验证都通过
       if (this.check1 && this.check2) {
         console.log(this.phone, this.password);
         console.log($.md5(this.password));
@@ -61,10 +62,16 @@ export default {
             username: this.phone,
             password: password
           })
+          //注册成功跳转
           .then(res => {
-            this.$router.push({
-              name: "login"
+
+            this.$dialog.alert({
+              title: "提示",
+              message: "注册成功"
             });
+            this.$router.push({
+              name:"login"
+            })
           });
       } else {
         this.$dialog.alert({

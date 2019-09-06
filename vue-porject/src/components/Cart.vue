@@ -4,13 +4,22 @@
       <h3>购物车</h3>
       <div @click="changexiadan">{{isxiadantext}}</div>
     </header>
+    <nav v-if="isxiadan">
+      <van-notice-bar mode="closeable">中秋福利，广大程序猿同志们相亲见面会于中秋当日在千锋教育HTML5-1906班盛大召开</van-notice-bar>
+    </nav>
     <main>
       <div class="listbox" v-for="(item,idx) in cartlist" :key="idx" :id="item.id">
         <div class="listdiv1">
           <van-checkbox v-model="item.ischeck" checked-color="#FF0000" @change="add125(item.id)"></van-checkbox>
         </div>
         <div class="listdiv2">
-          <van-card :num="item.qty" :price="item.price" :title="item.title" :thumb="item.imgurl">
+          <van-card
+            :num="item.qty"
+            :price="item.price"
+            :title="item.title"
+            :thumb="item.imgurl"
+            @click-thumb="gotodetails(item.id)"
+          >
             <div class="input" slot="footer">
               <van-stepper v-model="item.qty" min="1" max="8" />
             </div>
@@ -30,6 +39,16 @@
         </el-row>
       </div>
     </main>
+    <van-dialog
+      class="tancuang"
+      @confirm="ddconfirm"
+      @cancel="ddcancel"
+      v-model="show"
+      title="扫码付款"
+      show-cancel-button
+    >
+      <img src="1567737173.png" />
+    </van-dialog>
     <footer>
       <div class="fdiv1">
         <van-checkbox v-model="checked" @click="add521" checked-color="#FF0000">已选({{totalqty}})</van-checkbox>
@@ -40,7 +59,7 @@
         </p>
         <p>总额：￥{{totalprice.toFixed(2)}} 立减￥0</p>
       </div>
-      <div class="fdiv3" v-if="isxiadan">下单</div>
+      <div class="fdiv3" v-if="isxiadan" @click="changeerweima">下单</div>
       <div class="fdiv4" v-if="!isxiadan" @click="removeinbianji">删除</div>
     </footer>
   </div>
@@ -48,19 +67,30 @@
 
 <script>
 import Vue from "vue";
-import { Card, Checkbox, CheckboxGroup, Stepper, Dialog } from "vant";
+import {
+  Card,
+  Checkbox,
+  CheckboxGroup,
+  Stepper,
+  Dialog,
+  NoticeBar
+} from "vant";
 
 Vue.use(Card)
   .use(Checkbox)
   .use(CheckboxGroup)
   .use(Stepper)
-  .use(Dialog);
+  .use(Dialog)
+  .use(NoticeBar);
 import { mapState, mapGetters, mapMutations, mapActions } from "vuex";
 import { log } from "util";
+import { setTimeout } from "timers";
 
 export default {
   data() {
     return {
+      show: false,
+      username: "",
       isxiadan: true,
       isxiadantext: "编辑",
       checked: true,
@@ -77,15 +107,24 @@ export default {
     ...mapGetters(["totalprice", "totalqty"])
   },
   methods: {
+    ddconfirm() {
+      // console.log("点击了确认按钮");
+      // this.removeinbianji(); //在这之前应该先提交数据至订单表,应该去掉购物车里面已经购买的
+      // this.$router.push({ name: "my", params: { username: this.username } });//跳转至订单页面
+    },
+    ddcancel() {
+      // console.log("点击了取消按钮");
+    },
+    changeerweima() {
+      this.show = !this.show;
+    },
     removeinbianji() {
       let arrT = this.cartlist.filter(item => item.ischeck);
       let attr = [];
       arrT.forEach(e => {
         attr.push(e.id);
       });
-      console.log(attr);
-      
-      this.remove({ id: attr, username: "testuser" });
+      this.remove({ id: attr, username: this.username });
       this.$forceUpdate();
     },
     changexiadan() {
@@ -102,9 +141,14 @@ export default {
       });
     },
     add125(id) {
-      this.checked = this.cartlist.every(item => {
-        item.ischeck;
-      });
+      for (let i = 0; i < this.cartlist.length; i++) {
+        if (this.cartlist[i].ischeck == false) {
+          this.checked = false;
+          break;
+        } else {
+          this.checked = true;
+        }
+      }
     },
     add521() {
       this.cartlist.forEach(element => {
@@ -135,8 +179,9 @@ export default {
     }
   },
   created() {
-    this.getcart({ username: "testuser" });
     this.getlistdata();
+    this.username = localStorage.getItem("username");
+    this.getcart({ username: this.username });
   }
 };
 </script>
@@ -238,6 +283,16 @@ export default {
           }
         }
       }
+    }
+  }
+  .tancuang {
+    width: 80%;
+    height: 50%;
+    overflow: hidden;
+    img {
+      width: 80%;
+      display: block;
+      margin: auto;
     }
   }
   footer {

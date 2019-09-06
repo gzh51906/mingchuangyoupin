@@ -28,10 +28,8 @@ export default {
                     username: goods.username,
                     id: goods.id
                 }
-            }).then((data) => {
-                window.console.log(data);
-                axios.post("http://localhost:5786/usercart", goods).then((data) => {
-                    window.console.log(data);
+            }).then(() => {
+                axios.post("http://localhost:5786/usercart", goods).then(() => {
                     state.cartlist.push(goods);
 
                 })
@@ -39,22 +37,17 @@ export default {
 
 
         },
-        removeitem(state, {
-            username,
-            id
-        }) {
-            window.console.log(id, username, state.cartlist);
+
+        removeitem(state, { username, id }) {
             for (let i = 0; i < id.length; i++) {
                 for (let j = 0; j < state.cartlist.length; j++) {
                     if (state.cartlist[j].id == id[i]) {
-                        window.console.log(j);
                         axios.delete('http://localhost:5786/usercart', {
                             data: {
                                 username: username,
                                 id: state.cartlist[j].id
                             }
-                        }).then((data) => {
-                            window.console.log(data);
+                        }).then(() => {
                         })
                         state.cartlist.splice(j, 1);
                     }
@@ -83,23 +76,22 @@ export default {
                     username: username
                 }
             }).then((data) => {
-                state.cartlist = data.data.data
+                let abcd = data.data.data;
+                abcd.forEach(e => {
+                    e.ischeck = Boolean(e.ischeck);
+                });
+                state.cartlist = abcd;
             })
         }
     },
     actions: {
-        getusercart(context, {
-            username
-        }) {
-            window.console.log(username);
-
+        getusercart(context, { username }) {
             axios.get('http://localhost:5786/usercart/', {
                 params: {
                     username: username
                 }
             }).then((data) => {
                 this.state.cartlist = data.data.data
-                window.console.log(this.state.cartlist);
             })
         }
     }

@@ -7,7 +7,7 @@
         </router-link>
       </van-col>
       <van-col span="18">
-        <van-search placeholder="请输入搜索关键词" shape="round" input-align="center" @click="to" />
+        <van-search @click="gosearch" placeholder="请输入搜索关键词" shape="round" input-align="center" />
       </van-col>
     </van-row>
     <van-tabs border line-height="2px" @click="goto" v-model="classify">
@@ -97,8 +97,8 @@ export default {
         this.son = "Homeson";
       }
     },
-    to(){
-      this.$router.push({name:'searchjw'})
+    gosearch() {
+      this.$router.push({ name: "searchjw" });
     }
   },
   created() {

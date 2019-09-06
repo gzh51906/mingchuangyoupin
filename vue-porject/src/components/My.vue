@@ -110,7 +110,7 @@ Vue.use(Button);
 export default {
   
    data() {
-     console.log(localStorage.getItem("username"))
+     
     return {
       username:localStorage.getItem("username"),
       show: false

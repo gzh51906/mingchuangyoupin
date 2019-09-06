@@ -67,6 +67,8 @@ export default {
     this.getlistdatabot(this.name);
   },
   updated() {
+    this.getlistdata();
+    this.getlistdatabot(this.name);
     let timer = setTimeout(() => {
       this.numlittle = this.$store.getters.totalqty;
     }, 1000);
@@ -81,8 +83,6 @@ export default {
       this.$router.push({ name: "cart" });
     },
     onClick(name, title) {
-      // console.log(name, title);
-
       this.active = name;
       this.getlistdatabot(title);
     },
@@ -104,7 +104,6 @@ export default {
         }
       });
       this.tab.listtop = data.data.fenlei;
-      // console.log(this.tab.listtop);
 
       this.$forceUpdate();
     },
@@ -118,7 +117,6 @@ export default {
           }
         }
       );
-      // console.log(this.name, data);
       this.tab.listbot = data.data.tuijian;
 
       // this.tab.listbot = data.data;
