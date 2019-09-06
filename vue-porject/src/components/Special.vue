@@ -9,6 +9,8 @@
           src="http://s1.hgcang.com/bsimg/dede_uploads/allimg/170925/1-1F9251039130-L.jpg"
         />
       </van-col>
+      <p class="topp p1">优品推荐</p>
+      
       <van-col offset="1">
         <van-image
           width="4.35rem"
@@ -17,9 +19,10 @@
           src="http://s1.hgcang.com/bsimg/dede_uploads/allimg/170915/1-1F9151211490-L.jpg"
         />
       </van-col>
+      <p class="topp p2">买手推荐</p>
     </van-row>
 
-    <a href="#" class="ms" v-for="(item,idx) in spclist" :key="idx">
+    <a href="javascript:;" class="ms" v-for="(item,idx) in spclist" :key="idx">
 
       <div class="author">
         <div class="pic">
@@ -94,12 +97,26 @@ export default {
 .app {
   height: 120rem;
 }
+.topp{
+  color: #fff;
+  font-size: 0.6rem;
+  position: absolute;
+}
+.p1{
+  left: 1.3rem;
+  top: 1.1rem;
+}
+.p2{
+  left: 6.2rem;
+  top: 1.1rem;
+}
 .ms {
   display: block;
   width: 9.5rem;
   height: 8.3rem;
   padding: 0.25rem;
   background: #fff;
+  text-decoration:none;
 }
 .author {
   height: 1rem;
