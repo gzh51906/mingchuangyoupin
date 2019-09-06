@@ -118,11 +118,13 @@
       </div>
       <el-row class="tuijianlist" :gutter="20">
         <el-col :span="12" v-for="(item,idx) in goodlist" :key="idx">
-          <div class="grid-content bg-purple" @click="updatedetails(item.id)">
-            <img :src="item.imgurl" alt />
-            <h4>{{item.title}}</h4>
-            <p>{{item.price}}</p>
-          </div>
+          <a href="#backtop">
+            <div class="grid-content bg-purple" @click="updatedetails(item.id)">
+              <img :src="item.imgurl" alt />
+              <h4>{{item.title}}</h4>
+              <p>{{item.price}}</p>
+            </div>
+          </a>
         </el-col>
       </el-row>
     </main>
@@ -213,6 +215,7 @@ export default {
     updatedetails(id) {
       this.value = 1;
       this.getData(id);
+      console.log(document.documentElement.scrollHeight);
     },
     onChange(value) {
       Toast.loading({ forbidClick: true });

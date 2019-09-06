@@ -67,6 +67,8 @@ export default {
     this.getlistdatabot(this.name);
   },
   updated() {
+    this.getlistdata();
+    this.getlistdatabot(this.name);
     let timer = setTimeout(() => {
       this.numlittle = this.$store.getters.totalqty;
     }, 1000);
