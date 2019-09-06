@@ -30,9 +30,7 @@ export default {
                     id: goods.id
                 }
             }).then(() => {
-                // window.console.log(data);
                 axios.post("http://localhost:5786/usercart", goods).then(() => {
-                    // window.console.log(data);
                     state.cartlist.push(goods);
 
                 })
@@ -41,19 +39,15 @@ export default {
 
         },
         removeitem(state, { username, id }) {
-            // window.console.log(id, username, state.cartlist);
             for (let i = 0; i < id.length; i++) {
                 for (let j = 0; j < state.cartlist.length; j++) {
                     if (state.cartlist[j].id == id[i]) {
-                        // window.console.log(j);
                         axios.delete('http://localhost:5786/usercart', {
                             data: {
                                 username: username,
                                 id: state.cartlist[j].id
                             }
                         }).then(() => {
-                            // window.console.log(data);
-
                         })
                         state.cartlist.splice(j, 1);
                     }
@@ -78,28 +72,22 @@ export default {
                 }
             }).then((data) => {
                 let abcd = data.data.data;
-                // window.console.log(abcd);
-
                 abcd.forEach(e => {
                     e.ischeck = Boolean(e.ischeck);
                 });
                 state.cartlist = abcd;
-                // window.console.log(state.cartlist);
             })
         }
     },
     actions: {
         getusercart(context, { username }) {
-            window.console.log(username);
 
             axios.get('http://localhost:5786/usercart/', {
                 params: {
                     username: username
                 }
             }).then((data) => {
-                // window.console.log(data.data.data);
                 this.state.cartlist = data.data.data
-                window.console.log(this.state.cartlist);
             })
         }
     }

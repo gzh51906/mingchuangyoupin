@@ -58,15 +58,15 @@ export default {
         }
       });
       this.searchdata = data.data.suju;
-      //   console.log(data.data);
-
       this.$forceUpdate();
     },
     onSearch() {
       let text = this.value;
       this.getsearchdata(text);
     },
-    onCancel() {}
+    onCancel() {
+      this.$router.go(-1);
+    }
   }
 };
 </script>

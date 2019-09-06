@@ -142,13 +142,10 @@ export default {
           charset: "utf8"
         }
       });
-      // console.log(data.data.fenlei);
-
       this.listdata.listtop = data.data.fenlei;
       this.listdata.listbot = data.data.tuijian;
       //select * from tableName order by rand() limit N
       this.$forceUpdate();
-      // console.log(this.listdata);
     },
     changeIdx(idx) {
       this.active.index = Number(idx.index);
@@ -160,10 +157,9 @@ export default {
       this.listdata.name = this.tablist[this.active.index].name;
       this.getlistdata(idx);
 
-      //添加this.$forceUpdate();进行强制渲染，效果实现。网上找的还是搞不懂为什么不刷新，数据打印明明变了的，周一找林芳问下。
+      //添加this.$forceUpdate();,, 进行强制渲染，效果实现。网上找的还是搞不懂为什么不刷新，数据打印明明变了的，周一找林芳问下。
     },
     gotoclassification(asd) {
-      // console.log(asd);
       let a = asd.type;
       let b = asd.name;
       let c = asd.uid;

@@ -118,11 +118,13 @@
       </div>
       <el-row class="tuijianlist" :gutter="20">
         <el-col :span="12" v-for="(item,idx) in goodlist" :key="idx">
-          <div class="grid-content bg-purple" @click="updatedetails(item.id)">
-            <img :src="item.imgurl" alt />
-            <h4>{{item.title}}</h4>
-            <p>{{item.price}}</p>
-          </div>
+          <a href="#backtop">
+            <div class="grid-content bg-purple" @click="updatedetails(item.id)">
+              <img :src="item.imgurl" alt />
+              <h4>{{item.title}}</h4>
+              <p>{{item.price}}</p>
+            </div>
+          </a>
         </el-col>
       </el-row>
     </main>
@@ -213,8 +215,7 @@ export default {
     updatedetails(id) {
       this.value = 1;
       this.getData(id);
-      // this.backTop();
-      // this.$forceUpdate()
+      console.log(document.documentElement.scrollHeight);
     },
     onChange(value) {
       Toast.loading({ forbidClick: true });
@@ -242,14 +243,9 @@ export default {
           charset: "utf8"
         }
       });
-      // this.listdata.listtop = data.data.fenlei;
       this.goodlist = data.data.tuijian;
-      // console.log(this.goodlist);
-
-      // this.$forceUpdate();
     },
     add2cart() {
-      // console.log(this.data);
       let { id, imgurl, price, title } = this.data;
       let { cartlist } = this.$store.state.cart;
 
@@ -287,8 +283,6 @@ export default {
         // on close
         this.numlittle = this.$store.getters.totalqty;
       });
-      // console.log(this.$store.state.cart.cartlist);
-      // console.log(this.$store.getters.totalprice);
     },
     backTop() {
       window.scrollTo(0, 0);
@@ -297,20 +291,14 @@ export default {
   updated() {
     let timer = setTimeout(() => {
       this.numlittle = this.$store.getters.totalqty;
-      //   console.log(this.$store.getters.totalqty);
     }, 1000);
   },
   mounted() {
-    // console.log(this.$store.getters.totalqty);
-    // window.addEventListener("scroll", this.scrollToTop);
     let timer = setTimeout(() => {
       this.numlittle = this.$store.getters.totalqty;
-      //   console.log(this.$store.getters.totalqty);
     }, 1000);
   },
-  destroyed() {
-    // window.removeEventListener("scroll", this.scrollToTop);
-  }
+  destroyed() {}
 };
 </script>
 <style lang="scss" scoped>
