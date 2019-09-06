@@ -96,7 +96,7 @@ export default {
                 message: "密码错误"
               });
             }else if(res.data == "登陆成功"){
-                localStorage.setItem("username",this.phonep)
+                localStorage.setItem("username",this.phone)
                 this.$dialog.alert({
                 title: "提示",
                 message: "登陆成功"

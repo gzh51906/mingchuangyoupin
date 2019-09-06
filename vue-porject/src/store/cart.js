@@ -23,31 +23,16 @@ export default {
     },
     mutations: {
         additem(state, goods) {
-            window.console.log(goods, state, 111111111111111111);
-            // for (let i = 0; i < state.cartlist.length; i++) {
-            //     if (state.cartlist[i].id == goods.id) {
-            //         goods.qty = goods.qty + state.cartlist[i].qty;
-            //         axios.delete('http://localhost:5786/usercart', {
-            //             data: {
-            //                 username: goods.username,
-            //                 id: goods.id
-            //             }
-            //         }).then((data) => {
-            //             state.cartlist.splice(i, 1);
-            //             window.console.log(data, 2222);
-            //         })
-            //     }
 
-            // }
             axios.delete('http://localhost:5786/usercart', {
                 data: {
                     username: goods.username,
                     id: goods.id
                 }
-            }).then((data) => {
-                window.console.log(data);
-                axios.post("http://localhost:5786/usercart", goods).then((data) => {
-                    window.console.log(data);
+            }).then(() => {
+                // window.console.log(data);
+                axios.post("http://localhost:5786/usercart", goods).then(() => {
+                    // window.console.log(data);
                     state.cartlist.push(goods);
 
                 })
@@ -60,17 +45,17 @@ export default {
             for (let i = 0; i < id.length; i++) {
                 for (let j = 0; j < state.cartlist.length; j++) {
                     if (state.cartlist[j].id == id[i]) {
-                        window.console.log(j);
+                        // window.console.log(j);
                         axios.delete('http://localhost:5786/usercart', {
                             data: {
                                 username: username,
                                 id: state.cartlist[j].id
                             }
-                        }).then((data) => {
-                            state.cartlist.splice(j, 1);
-                            window.console.log(data);
+                        }).then(() => {
+                            // window.console.log(data);
 
                         })
+                        state.cartlist.splice(j, 1);
                     }
                 }
             }
@@ -92,7 +77,13 @@ export default {
                     username: username
                 }
             }).then((data) => {
-                state.cartlist = data.data.data
+                let abcd = data.data.data;
+                // window.console.log(abcd);
+
+                abcd.forEach(e => {
+                    e.ischeck = Boolean(e.ischeck);
+                });
+                state.cartlist = abcd;
                 // window.console.log(state.cartlist);
             })
         }
