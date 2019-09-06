@@ -33,15 +33,6 @@
                 <el-menu-item index="add">商品添加</el-menu-item>
               </el-menu-item-group>
             </el-submenu>
-            <el-submenu index="2">
-              <template slot="title">
-                <i class="el-icon-location"></i>
-                <span slot="title">用户管理</span>
-              </template>
-              <el-menu-item-group>
-                <el-menu-item index="user">用户列表</el-menu-item>
-              </el-menu-item-group>
-            </el-submenu>
           </el-menu>
         </el-aside>
         <el-main class="right">
@@ -62,13 +53,11 @@ import "element-ui/lib/theme-chalk/index.css";
 
 import Goods from "./home/goods";
 import Add from "./home/add.vue";
-import User from "./home/user.vue";
 
 export default {
   components: {
     Goods,
-    Add,
-    User
+    Add
   },
   data() {
     return {
@@ -112,8 +101,11 @@ export default {
       }
     }
   }
-  .right{
-      background-color: #fff;
+  .right {
+    background-color: #fff;
   }
+}
+.el-main {
+  padding-top: 0px !important;
 }
 </style>

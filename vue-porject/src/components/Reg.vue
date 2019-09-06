@@ -7,7 +7,12 @@
     />
     <van-cell-group>
       <van-field placeholder="手机号" v-model="phone" @blur="test" />
-      <van-field type="password" placeholder="密码不能含有非法字符，长度在4-10之间" @blur="psw" v-model="password" />
+      <van-field
+        type="password"
+        placeholder="密码不能含有非法字符，长度在4-10之间"
+        @blur="psw"
+        v-model="password"
+      />
     </van-cell-group>
     <div class="next">
       <a href="#" @click="zc">注册</a>
@@ -29,14 +34,13 @@ import { NavBar } from "vant";
 import { Field } from "vant";
 import { Cell, CellGroup } from "vant";
 import axios from "axios";
-import "../static/jquery-3.4.1"
-import "../static/md5"
+import "../static/jquery-3.4.1";
+import "../static/md5";
 Vue.use(Cell).use(CellGroup);
 Vue.use(Image);
 Vue.use(Field);
 Vue.use(NavBar);
 export default {
-
   data() {
     return {
       phone: "",
@@ -51,14 +55,16 @@ export default {
       if (this.check1 && this.check2) {
         console.log(this.phone, this.password);
         console.log($.md5(this.password));
-        let password = $.md5(this.password)
+        let password = $.md5(this.password);
         this.$axios
           .post("http://localhost:5786/reg", {
             username: this.phone,
             password: password
           })
           .then(res => {
-            // console.log(res);
+            this.$router.push({
+              name: "login"
+            });
           });
       } else {
         this.$dialog.alert({

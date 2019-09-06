@@ -83,6 +83,8 @@ export default {
       arrT.forEach(e => {
         attr.push(e.id);
       });
+      console.log(attr);
+      
       this.remove({ id: attr, username: "testuser" });
       this.$forceUpdate();
     },

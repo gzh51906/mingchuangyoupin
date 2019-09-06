@@ -23,22 +23,6 @@ export default {
     },
     mutations: {
         additem(state, goods) {
-            window.console.log(goods, state, 111111111111111111);
-            // for (let i = 0; i < state.cartlist.length; i++) {
-            //     if (state.cartlist[i].id == goods.id) {
-            //         goods.qty = goods.qty + state.cartlist[i].qty;
-            //         axios.delete('http://localhost:5786/usercart', {
-            //             data: {
-            //                 username: goods.username,
-            //                 id: goods.id
-            //             }
-            //         }).then((data) => {
-            //             state.cartlist.splice(i, 1);
-            //             window.console.log(data, 2222);
-            //         })
-            //     }
-
-            // }
             axios.delete('http://localhost:5786/usercart', {
                 data: {
                     username: goods.username,
@@ -55,8 +39,11 @@ export default {
 
 
         },
-        removeitem(state, { username, id }) {
-            // window.console.log(id, username, state.cartlist);
+        removeitem(state, {
+            username,
+            id
+        }) {
+            window.console.log(id, username, state.cartlist);
             for (let i = 0; i < id.length; i++) {
                 for (let j = 0; j < state.cartlist.length; j++) {
                     if (state.cartlist[j].id == id[i]) {
@@ -67,15 +54,17 @@ export default {
                                 id: state.cartlist[j].id
                             }
                         }).then((data) => {
-                            state.cartlist.splice(j, 1);
                             window.console.log(data);
-
                         })
+                        state.cartlist.splice(j, 1);
                     }
                 }
             }
         },
-        changeqty(state, { qty, id }) {
+        changeqty(state, {
+            qty,
+            id
+        }) {
             state.cartlist = state.cartlist.map(item => {
                 if (item.id === id) {
                     item.qty = qty;
@@ -86,19 +75,22 @@ export default {
         clearcart(state) {
             state.cartlist = []
         },
-        getuserdata(state, { username }) {
+        getuserdata(state, {
+            username
+        }) {
             axios.get('http://localhost:5786/usercart/', {
                 params: {
                     username: username
                 }
             }).then((data) => {
                 state.cartlist = data.data.data
-                // window.console.log(state.cartlist);
             })
         }
     },
     actions: {
-        getusercart(context, { username }) {
+        getusercart(context, {
+            username
+        }) {
             window.console.log(username);
 
             axios.get('http://localhost:5786/usercart/', {
@@ -106,7 +98,6 @@ export default {
                     username: username
                 }
             }).then((data) => {
-                // window.console.log(data.data.data);
                 this.state.cartlist = data.data.data
                 window.console.log(this.state.cartlist);
             })
