@@ -1,10 +1,6 @@
 <template>
   <div>
-    <el-form
-      :label-position="labelPosition"
-      label-width="80px"
-      :model="formLabelAlign"
-    >
+    <el-form :label-position="labelPosition" label-width="80px" :model="formLabelAlign">
       <el-form-item label="名称" required>
         <el-input v-model="formLabelAlign.title" autofocus></el-input>
       </el-form-item>
@@ -31,9 +27,7 @@
 </template>
 <script>
 import Vue from "vue";
-import ElementUI from "element-ui";
-Vue.use(ElementUI);
-import "element-ui/lib/theme-chalk/index.css";
+
 export default {
   data() {
     return {
@@ -62,8 +56,8 @@ export default {
             imgurl: this.formLabelAlign.imgurl
           })
           .then(res => {
-            alert("添加成功！")
-            this.formLabelAlign = {}
+            alert("添加成功！");
+            this.formLabelAlign = {};
           });
       } else {
         alert("对不起，请完整输入！");

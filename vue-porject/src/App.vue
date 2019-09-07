@@ -14,8 +14,7 @@
         v-for="item in meun"
         :key="item.name"
         class="botton"
-        >{{ item.text }}</van-tabbar-item
-      >
+      >{{ item.text }}</van-tabbar-item>
     </van-tabbar>
   </div>
 </template>
@@ -23,22 +22,14 @@
 <script>
 import Vue from "vue";
 
-import MintUI from "mint-ui";
-Vue.use(MintUI);
-import "mint-ui/lib/style.css";
-
-import ElementUI from "element-ui";
-Vue.use(ElementUI);
-import "element-ui/lib/theme-chalk/index.css";
-
-import NutUI from "@nutui/nutui";
-Vue.use(NutUI);
-import "@nutui/nutui/dist/nutui.css";
+// import ElementUI from "element-ui";
+// Vue.use(ElementUI);
+// import "element-ui/lib/theme-chalk/index.css";
 
 import { Tabbar, TabbarItem } from "vant";
 Vue.use(Tabbar).use(TabbarItem);
 
-import "../src/static/rem.js"
+import "../src/static/rem.js";
 
 export default {
   data() {

@@ -129,14 +129,14 @@ export default {
       position: absolute;
       top: 98px;
       right: 45px;
-      background: url("../static/img/icon.png") no-repeat;
+      background: url("http://localhost:5786/static/img/icon.png") no-repeat;
       background-position-y: -30px;
     }
     .iconb {
       position: absolute;
       top: 142px;
       right: 45px;
-      background: url("../static/img/icon.png") no-repeat;
+      background: url("http://localhost:5786/static/img/icon.png") no-repeat;
       background-position-x: -30px;
       background-position-y: -30px;
     }
@@ -158,7 +158,7 @@ export default {
       margin-left: 10px;
     }
     i {
-      background: url("../static/img/icon.png") no-repeat;
+      background: url("http://localhost:5786/static/img/icon.png") no-repeat;
       background-position: -60px 0px;
       display: inline-block;
       width: 17px;

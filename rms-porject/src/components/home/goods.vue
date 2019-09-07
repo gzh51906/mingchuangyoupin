@@ -1,10 +1,6 @@
 <template>
   <div class="box">
-    <el-input
-      placeholder="请输入内容"
-      v-model="input5"
-      class="input-with-select"
-    >
+    <el-input placeholder="请输入内容" v-model="input5" class="input-with-select">
       <el-select v-model="select" slot="prepend" placeholder="请选择" class="huang">
         <el-option label="ID" value="id"></el-option>
         <el-option label="商品名称" value="title"></el-option>
@@ -14,65 +10,25 @@
       <el-button slot="append" icon="el-icon-search"></el-button>
     </el-input>
     <el-table :data="goodslist" stripe style="width: 100%" border>
-      <el-table-column prop="id" label="ID" width="80" align="center">
-      </el-table-column>
-      <el-table-column
-        prop="title"
-        label="名称"
-        width="280"
-        align="center"
-        show-overflow-tooltip
-      >
-      </el-table-column>
-      <el-table-column
-        prop="brief"
-        label="简介"
-        align="center"
-        width="200"
-        show-overflow-tooltip
-      >
-      </el-table-column>
-      <el-table-column prop="price" label="价格" width="120" align="center">
-      </el-table-column>
-      <el-table-column prop="class" label="分区" width="120" align="center">
-      </el-table-column>
-      <el-table-column prop="category" label="类别" align="center" width="120">
-      </el-table-column>
-      <el-table-column
-        prop="imgurl"
-        label="图片"
-        align="center"
-        show-overflow-tooltip
-      >
-      </el-table-column>
+      <el-table-column prop="id" label="ID" width="80" align="center"></el-table-column>
+      <el-table-column prop="title" label="名称" width="280" align="center" show-overflow-tooltip></el-table-column>
+      <el-table-column prop="brief" label="简介" align="center" width="200" show-overflow-tooltip></el-table-column>
+      <el-table-column prop="price" label="价格" width="120" align="center"></el-table-column>
+      <el-table-column prop="class" label="分区" width="120" align="center"></el-table-column>
+      <el-table-column prop="category" label="类别" align="center" width="120"></el-table-column>
+      <el-table-column prop="imgurl" label="图片" align="center" show-overflow-tooltip></el-table-column>
       <el-table-column label="操作" align="center">
         <template slot-scope="scope">
-          <el-button size="mini" @click="handleEdit(scope.$index, scope.row)"
-            >编辑</el-button
-          >
-          <el-button
-            size="mini"
-            type="danger"
-            @click="handleDelete(scope.$index, scope.row)"
-            >删除</el-button
-          >
+          <el-button size="mini" @click="handleEdit(scope.$index, scope.row)">编辑</el-button>
+          <el-button size="mini" type="danger" @click="handleDelete(scope.$index, scope.row)">删除</el-button>
         </template>
       </el-table-column>
     </el-table>
     <div class="block">
-      <el-pagination
-        layout="prev, pager, next"
-        :total="number"
-        @current-change="sizeChange"
-      >
-      </el-pagination>
+      <el-pagination layout="prev, pager, next" :total="number" @current-change="sizeChange"></el-pagination>
     </div>
     <div class="none" :style="'display:' + display">
-      <el-form
-        :label-position="labelPosition"
-        label-width="80px"
-        :model="formLabelAlign"
-      >
+      <el-form :label-position="labelPosition" label-width="80px" :model="formLabelAlign">
         <el-form-item label="ID">
           <el-input v-model="formLabelAlign.id" disabled></el-input>
         </el-form-item>
@@ -104,9 +60,7 @@
 </template>
 <script>
 import Vue from "vue";
-import ElementUI from "element-ui";
-Vue.use(ElementUI);
-import "element-ui/lib/theme-chalk/index.css";
+
 export default {
   data() {
     return {
@@ -303,7 +257,7 @@ export default {
 .button {
   text-align: center;
 }
-.huang{
+.huang {
   width: 150px;
 }
 </style>

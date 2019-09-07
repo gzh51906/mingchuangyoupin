@@ -28,7 +28,7 @@
       </div>
       <div class="tuijian">
         <h4>猜您喜欢</h4>
-        <el-row class="listt" :gutter="20">
+        <el-row class="listt">
           <el-col :span="12" v-for="(item,idx) in goodlist" :key="idx">
             <div class="grid-content bg-purple" :id="item.id" @click="gotodetails(item.id)">
               <img :src="item.imgurl" alt />
@@ -259,6 +259,7 @@ export default {
         font-size: 0.4rem;
       }
       .listt {
+        width: 100%;
         background: #fff;
         .grid-content {
           padding: 0.133333rem;
@@ -273,6 +274,8 @@ export default {
             text-align: left;
             width: 100%;
             overflow: hidden;
+            margin: 0;
+            box-sizing: border-box;
             text-overflow: ellipsis;
             white-space: nowrap;
           }

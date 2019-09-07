@@ -5,13 +5,12 @@
 </template>
 
 <script>
-import './static/base.css'
+import "./static/base.css";
+
 export default {
-  name: 'app',
-  components: {
-    
-  }
-}
+  name: "app",
+  components: {}
+};
 </script>
 
 <style lang="scss" scoped>
