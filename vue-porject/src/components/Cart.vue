@@ -166,7 +166,7 @@ export default {
     ...mapActions(["getusercart"]),
 
     async getlistdata() {
-      let { data } = await this.$axios.get("http://localhost:5786/classify/", {
+      let { data } = await this.$axios.get("../classify/", {
         params: {
           type: "居家",
           charset: "utf8"

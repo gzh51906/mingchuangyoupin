@@ -45,7 +45,7 @@ export default {
             alert("账号密码不能为空！")
         }else{
             let passwordMD5 = $.md5(this.password);
-            this.$axios.post("http://localhost:1906/rms",{
+            this.$axios.post("../rms",{
               username:this.username,
               password:passwordMD5
             }).then(res =>{

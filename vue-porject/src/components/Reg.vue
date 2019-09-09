@@ -58,7 +58,7 @@ export default {
         console.log($.md5(this.password));
         let password = $.md5(this.password);
         this.$axios
-          .post("http://localhost:5786/reg", {
+          .post("../reg", {
             username: this.phone,
             password: password
           })

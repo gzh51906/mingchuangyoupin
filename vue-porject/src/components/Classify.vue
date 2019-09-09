@@ -136,7 +136,7 @@ export default {
   },
   methods: {
     async getlistdata(idx) {
-      let { data } = await this.$axios.get("http://localhost:5786/classify/", {
+      let { data } = await this.$axios.get("../classify/", {
         params: {
           type: this.listdata.name,
           charset: "utf8"

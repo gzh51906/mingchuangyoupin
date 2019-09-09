@@ -156,13 +156,13 @@ export default {
     }
   },
   created() {
-    this.$axios.get("http://localhost:5786/home/xptl").then(res => {
+    this.$axios.get("../home/xptl").then(res => {
       this.brand = res.data.data.tuijian;
     });
-    this.$axios.get("http://localhost:5786/home/xpsf").then(res => {
+    this.$axios.get("../home/xpsf").then(res => {
       this.newlist = res.data.data.tuijian;
     });
-    this.$axios.get("http://localhost:5786/home/rptj").then(res => {
+    this.$axios.get("../home/rptj").then(res => {
       this.hotlist = res.data.data.tuijian;
     });
   }

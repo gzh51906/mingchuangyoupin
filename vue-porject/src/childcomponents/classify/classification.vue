@@ -97,7 +97,7 @@ export default {
       this.$router.push({ name: "searchjw" });
     },
     async getlistdata() {
-      let { data } = await this.$axios.get("http://localhost:5786/classify/", {
+      let { data } = await this.$axios.get("../classify/", {
         params: {
           type: this.type,
           charset: "utf8"
@@ -109,7 +109,7 @@ export default {
     },
     async getlistdatabot(name) {
       let { data } = await this.$axios.get(
-        "http://localhost:5786/classifiaction/",
+        "../classifiaction/",
         {
           params: {
             category: name,

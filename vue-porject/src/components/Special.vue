@@ -83,7 +83,7 @@ export default {
         }
     },
     created() {
-    this.$axios.get("http://localhost:5786/special").then(res => {
+    this.$axios.get("../special").then(res => {
 
       this.spclist = res.data.data.spe;
 

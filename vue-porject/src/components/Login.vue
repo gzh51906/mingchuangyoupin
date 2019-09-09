@@ -74,7 +74,7 @@ export default {
       } else {
         let password = $.md5(this.password)
         this.$axios
-          .post("http://localhost:5786/login", {
+          .post("../login", {
             username: this.phone,
             password: password
           })

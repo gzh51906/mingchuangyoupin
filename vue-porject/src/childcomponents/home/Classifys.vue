@@ -47,10 +47,10 @@ export default {
     }
   },
   created() {
-    this.$axios.get("http://localhost:5786/home/homeclassifyimg").then(res => {
+    this.$axios.get("../home/homeclassifyimg").then(res => {
       this.imgurl = res.data.data.tuijian;
     });
-    this.$axios.get("http://localhost:5786/home/rptj").then(res => {
+    this.$axios.get("../home/rptj").then(res => {
       this.goods = res.data.data.tuijian;
     });
   },
@@ -64,12 +64,12 @@ export default {
     idxitem() {
       if (this.idxitem != "新品") {
         this.$axios
-          .get(`http://localhost:5786/home/homeclassify/${this.idxitem}`)
+          .get(`../home/homeclassify/${this.idxitem}`)
           .then(res => {
             this.goods = res.data.data.tuijian;
           });
       } else {
-        this.$axios.get("http://localhost:5786/home/rptj").then(res => {
+        this.$axios.get("../home/rptj").then(res => {
           this.goods = res.data.data.tuijian;
         });
       }
