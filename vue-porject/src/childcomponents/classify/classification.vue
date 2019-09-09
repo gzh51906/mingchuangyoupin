@@ -67,8 +67,8 @@ export default {
     this.getlistdatabot(this.name);
   },
   updated() {
-    this.getlistdata();
-    this.getlistdatabot(this.name);
+    // this.getlistdata();
+    // this.getlistdatabot(this.name);
     let timer = setTimeout(() => {
       this.numlittle = this.$store.getters.totalqty;
     }, 1000);
@@ -84,7 +84,9 @@ export default {
     },
     onClick(name, title) {
       this.active = name;
+      console.log(title);
       this.getlistdatabot(title);
+      console.log(this.tab);
     },
     gotodetails(id) {
       this.$router.push({ name: "details", params: { id } });
@@ -104,8 +106,8 @@ export default {
         }
       });
       this.tab.listtop = data.data.fenlei;
-
-      this.$forceUpdate();
+      // console.log(this.tab.listtop);
+      // this.$forceUpdate();
     },
     async getlistdatabot(name) {
       let { data } = await this.$axios.get(
@@ -118,7 +120,7 @@ export default {
         }
       );
       this.tab.listbot = data.data.tuijian;
-
+      // console.log(this.tab.listbot);
       // this.tab.listbot = data.data;
       this.$forceUpdate();
     }

@@ -219,6 +219,10 @@ export default {
 }
 .lalala {
   text-align: center;
+  width: 100%;
+  margin: 0;
+  padding-left: 10px;
+  box-sizing: border-box;
   // height: 100%;
   // overflow: auto;
   // border-left: 1px solid #dcdfe6;

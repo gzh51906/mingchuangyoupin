@@ -19,6 +19,7 @@ Vue.use(VueRouter);
 // 实例化router并配置参数
 let router = new VueRouter({
     // mode:'history' -> /xxx ,// 默认hash -> /#/xxx  
+    mode: 'history',
     routes: [{
         // 当url路径为/home时渲染home组件到<router-view>上
         name: 'home',
@@ -29,12 +30,12 @@ let router = new VueRouter({
         name: 'cart',
         path: '/cart',
         component: Cart,
-        beforeEnter:(to,from,next)=>{
-            if(localStorage.getItem("username") == null){
+        beforeEnter: (to, from, next) => {
+            if (localStorage.getItem("username") == null) {
                 next({
-                    path:'/login'
+                    path: '/login'
                 })
-            }else{
+            } else {
                 next();
 
             }
@@ -60,17 +61,17 @@ let router = new VueRouter({
         path: '/special',
         component: Special
     },
-    
+
     {
         name: 'my',
         path: '/my',
         component: My,
-        beforeEnter:(to,from,next)=>{
-            if(localStorage.getItem("username") == null){
+        beforeEnter: (to, from, next) => {
+            if (localStorage.getItem("username") == null) {
                 next({
-                    path:'/login'
+                    path: '/login'
                 })
-            }else{
+            } else {
                 next();
 
             }
@@ -100,23 +101,23 @@ let router = new VueRouter({
         name: 'reg',
         path: '/reg',
         component: Reg
-    },{
-        name:'login',
-        path:'/login',
-        component:Login,
-        beforeEnter:(to,from,next)=>{
+    }, {
+        name: 'login',
+        path: '/login',
+        component: Login,
+        beforeEnter: (to, from, next) => {
             localStorage.clear();
             next();
         }
     },
-    
+
     {
         // 当浏览器路径为/时，重定向到/home
         path: '/',
         redirect: {
             name: 'home'
         }
-    
+
     }
     ]
 })

@@ -4,11 +4,8 @@
       <el-container>
         <el-aside width="200px" class="left">
           <div class="user">
-            <router-link to="/home"
-              ><img
-                class="img"
-                src="http://www.miniso.cn/Content/Make/images/logo.png"
-              />
+            <router-link to="/home">
+              <img class="img" src="http://www.miniso.cn/Content/Make/images/logo.png" />
             </router-link>
             <div class="out">
               <p>{{ user }}</p>
@@ -47,9 +44,6 @@
 
 <script>
 import Vue from "vue";
-import ElementUI from "element-ui";
-Vue.use(ElementUI);
-import "element-ui/lib/theme-chalk/index.css";
 
 import Goods from "./home/goods";
 import Add from "./home/add.vue";
@@ -105,7 +99,15 @@ export default {
     background-color: #fff;
   }
 }
+.el-container {
+  height: 100%;
+  background: #ffffff;
+}
+.el-aside {
+  height: 100%;
+}
 .el-main {
+  height: 100%;
   padding-top: 0px !important;
 }
 </style>
