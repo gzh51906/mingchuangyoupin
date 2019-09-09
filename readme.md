@@ -6,10 +6,10 @@
 ## 项目要求
 * 项目名称 ：名创优品
 * 演示
-	* 官网[](http://m.miniso.cn/wap/index.html)
-	* 上线地址[](http://47.100.118.206:1906)
-	* 后台地址[](http://47.100.118.206:1907)
-	* git仓库地址[](https://github.com/gzh51906/mingchuangyoupin)
+	* 官网  (http://m.miniso.cn/wap/index.html)
+	* 上线地址  (http://47.100.118.206:1906)
+	* 后台地址  (http://47.100.118.206:1907)
+	* git仓库地址   (https://github.com/gzh51906/mingchuangyoupin)
 * 团队分工
 	* 组长：陈炜   成员 ： 黄林芳  王佳伟
 	* 黄林芳：负责的是首页页面的搭建，后台管理系统操作商品数据修改编辑和上新
@@ -89,8 +89,8 @@
 * Vuex
 * Vue-Router
 * Vue-Cli
-* axios/fetch
-* elementUI/MintUI/iView/antd
+* axios
+* elementUI/MintUI/vant/NutUi
 * git
 
 ### 后端
