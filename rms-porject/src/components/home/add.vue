@@ -53,7 +53,7 @@ export default {
         this.formLabelAlign.imgurl
       ) {
         this.$axios
-          .post("http://localhost:5786/rms/add", {
+          .post("http://localhost:1906/rms/add", {
             title: this.formLabelAlign.title,
             brief: this.formLabelAlign.brief,
             price: this.formLabelAlign.price,
