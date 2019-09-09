@@ -86,7 +86,7 @@ export default {
           this.select == "category"
         ) {
           this.$axios
-            .get("http://localhost:1906/rms/title", {
+            .get("../rms/title", {
               params: {
                 select: this.select,
                 item: this.input5
@@ -96,7 +96,7 @@ export default {
               this.number = res.data.data.tuijian.length;
               if (this.page) {
                 this.$axios
-                  .get("http://localhost:1906/rms/title/page", {
+                  .get("../rms/title/page", {
                     params: {
                       select: this.select,
                       item: this.input5,
@@ -108,7 +108,7 @@ export default {
                   });
               } else {
                 this.$axios
-                  .get("http://localhost:1906/rms/title/page", {
+                  .get("../rms/title/page", {
                     params: {
                       select: this.select,
                       item: this.input5,
@@ -123,7 +123,7 @@ export default {
         } else if (this.select == "id") {
           if (this.input5) {
             this.$axios
-              .get("http://localhost:1906/rms/id", {
+              .get("../rms/id", {
                 params: {
                   id: this.input5
                 }
@@ -134,7 +134,7 @@ export default {
               });
           } else {
             this.$axios
-              .get("http://localhost:1906/rms/goods", {
+              .get("../rms/goods", {
                 params: {
                   page: 1
                 }
@@ -142,7 +142,7 @@ export default {
               .then(res => {
                 this.goodslist = res.data.data.tuijian;
               });
-            this.$axios.get("http://localhost:1906/rms").then(res => {
+            this.$axios.get("../rms").then(res => {
               this.number = res.data.length;
             });
           }
@@ -155,7 +155,7 @@ export default {
       if (this.input5) {
         this.page = page;
         this.$axios
-          .get("http://localhost:1906/rms/title/page", {
+          .get("../rms/title/page", {
             params: {
               select: this.select,
               item: this.input5,
@@ -168,7 +168,7 @@ export default {
       } else {
         this.page = page;
         this.$axios
-          .get("http://localhost:1906/rms/goods", {
+          .get("../rms/goods", {
             params: {
               page: page
             }
@@ -184,14 +184,14 @@ export default {
     },
     handleDelete(index, row) {
       this.$axios
-        .delete("http://localhost:1906/rms", {
+        .delete("../rms", {
           params: {
             id: row.id
           }
         })
         .then(res => {
           this.$axios
-            .get("http://localhost:1906/rms/goods", {
+            .get("../rms/goods", {
               params: {
                 page: this.page
               }
@@ -206,7 +206,7 @@ export default {
     },
     change() {
       this.$axios
-        .post("http://localhost:1906/rms/change", {
+        .post("../rms/change", {
           id: this.formLabelAlign.id,
           title: this.formLabelAlign.title,
           brief: this.formLabelAlign.brief,
@@ -222,7 +222,7 @@ export default {
   },
   created() {
     this.$axios
-      .get("http://localhost:1906/rms/goods", {
+      .get("../rms/goods", {
         params: {
           page: 1
         }
@@ -230,7 +230,7 @@ export default {
       .then(res => {
         this.goodslist = res.data.data.tuijian;
       });
-    this.$axios.get("http://localhost:1906/rms").then(res => {
+    this.$axios.get("../rms").then(res => {
       this.number = res.data.length;
     });
   }

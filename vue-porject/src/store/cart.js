@@ -23,13 +23,13 @@ export default {
     },
     mutations: {
         additem(state, goods) {
-            axios.delete('http://localhost:5786/usercart', {
+            axios.delete('../usercart', {
                 data: {
                     username: goods.username,
                     id: goods.id
                 }
             }).then(() => {
-                axios.post("http://localhost:5786/usercart", goods).then(() => {
+                axios.post("../usercart", goods).then(() => {
                     state.cartlist.push(goods);
 
                 })
@@ -42,7 +42,7 @@ export default {
             for (let i = 0; i < id.length; i++) {
                 for (let j = 0; j < state.cartlist.length; j++) {
                     if (state.cartlist[j].id == id[i]) {
-                        axios.delete('http://localhost:5786/usercart', {
+                        axios.delete('../usercart', {
                             data: {
                                 username: username,
                                 id: state.cartlist[j].id
@@ -71,7 +71,7 @@ export default {
         getuserdata(state, {
             username
         }) {
-            axios.get('http://localhost:5786/usercart/', {
+            axios.get('../usercart/', {
                 params: {
                     username: username
                 }
@@ -86,7 +86,7 @@ export default {
     },
     actions: {
         getusercart(context, { username }) {
-            axios.get('http://localhost:5786/usercart/', {
+            axios.get('../usercart/', {
                 params: {
                     username: username
                 }

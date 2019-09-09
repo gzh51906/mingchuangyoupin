@@ -227,7 +227,7 @@ export default {
     async getData(id) {
       let {
         data: { data }
-      } = await this.$axios.get("http://localhost:5786/detialsjw/", {
+      } = await this.$axios.get("../detialsjw/", {
         params: {
           uid: id
         }
@@ -237,7 +237,7 @@ export default {
       this.getlistdata(type);
     },
     async getlistdata(type) {
-      let { data } = await this.$axios.get("http://localhost:5786/classify/", {
+      let { data } = await this.$axios.get("../classify/", {
         params: {
           type: type,
           charset: "utf8"

@@ -51,7 +51,7 @@ export default {
       this.$router.push({ name: "details", params: { id } });
     },
     async getsearchdata(text) {
-      let { data } = await this.$axios.get("http://localhost:5786/searchjw/", {
+      let { data } = await this.$axios.get("../searchjw/", {
         params: {
           text: text,
           charset: "utf8"
