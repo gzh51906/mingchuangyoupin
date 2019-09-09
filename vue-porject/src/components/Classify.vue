@@ -68,7 +68,7 @@ import { Sidebar, SidebarItem } from "vant";
 
 Vue.use(Sidebar);
 Vue.use(SidebarItem);
-// localhost:5786/classify/?type=居家&charset=utf8
+// localhost:1907/classify/?type=居家&charset=utf8
 export default {
   data() {
     return {
